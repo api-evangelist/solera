@@ -1,0 +1,82 @@
+generated: '2026-07-25'
+method: searched
+source: |
+  Estimate Document Return API Integration Guide (https://na.api.solera.com/files/Estimate%20Return%20API.pdf),
+  Claim Image Document Return API Integration Guide (https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf),
+  GIC - Image Capture API Integration Guide (https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx)
+asyncapi_published: false
+asyncapi_generated: asyncapi/solera-eapi-asyncapi.yml
+model: |
+  Solera / Audatex do not offer subscription-managed webhooks in the usual sense — there
+  is no endpoint registry, no dashboard, no secret rotation and no replay UI. Callback
+  delivery is configured PER ASSIGNMENT: the client embeds its own endpoints and the
+  credentials Audatex should use in the `responseRoute` block of the assignment request
+  (POST /api/v2/assignments), or agrees pre-defined routes with Audatex during onboarding.
+  Audatex then authenticates against the CLIENT's authorization server and POSTs the
+  event. This is a real outbound event surface, documented only in PDF/DOCX prose.
+registration:
+  mechanism: responseRoute block on the assignment request
+  fields:
+  - responseRoute.authorization.href
+  - responseRoute.authorization.body.client_Id
+  - responseRoute.authorization.body.client_Secret
+  - responseRoute.authorization.body.audience
+  - responseRoute.authorization.body.scope
+  - responseRoute.responseMessage[].type
+  - responseRoute.responseMessage[].href
+  schema: openapi/solera-dashboard-assignment-openapi.json#/components/schemas/ResponseRouteRequest
+  alternative: Pre-defined routes agreed with Audatex; in production, "client provide the
+    endpoints - URL and authentication to setup previously."
+events:
+- type: Assignment
+  message_type: null
+  description: Assignment acknowledgement pushed to the client endpoint registered with
+    responseMessage[].type "Assignment".
+  sample_operation: openapi/solera-dashboard-assignment-openapi.json#POST /api/v2/assignmentAcks
+- type: EstimateReturn
+  message_type: Audatex.Event.EstimateComplete
+  description: Raised when an Audatex Estimate (ADXE) completes. Carries a HATEOAS
+    Body.Links[] array with one link per retrievable document (claimXml, printImages,
+    attachments).
+  follow_up: Client GETs each Href on the Audatex GetDocuments surface.
+  sample_operation: openapi/solera-dashboard-assignment-openapi.json#POST /api/v2/EstimateReturnResponse
+- type: ClaimImageReturn
+  message_type: Audatex.Event.EstimateComplete
+  description: Claim image variant of the completion event; Body.Links[].Rel is
+    claimImage and the Href points at the GetImage surface.
+  fallback: If the client does not register a Claim Image URL, Audatex reuses the Estimate
+    Return URL.
+- type: M31
+  message_type: adxe.estimate.image-upload-for-mobile-completed
+  description: Mobile image-upload-completed event raised by Audatex Estimate once images
+    captured on the mobile client finish uploading.
+  acknowledgement: openapi/solera-gic-integration-openapi.json#POST /api/v1/getM31EventAcks
+delivery:
+  transport: HTTPS POST from Audatex to a client-hosted endpoint
+  guarantee: at-least-once
+  retries:
+  - scope: EstimateReturn / ClaimImageReturn
+    attempts: 3
+    timeout_seconds: 15
+    on_exhaustion: routed to the Audatex reject queue
+  - scope: M31
+    attempts: 3
+    interval_seconds: 10
+    on_exhaustion: routed to the reject queue
+  failure_notification: '"We may enable the sending of email notifications upon request."'
+  success_signal: The client endpoint must return "success"; the guides do not define the
+    exact status code or body that qualifies.
+security:
+  signature_header: null
+  verification: |
+    No HMAC signature and no shared secret header. The client verifies Audatex by issuing
+    it a token from the client's OWN authorization server using credentials the client
+    supplied in responseRoute.authorization, and optionally by allowlisting the Audatex
+    egress IPs (Tanzu Test 170.76.172.18, Tanzu Prod 170.76.172.20). A VPN or SSL over the
+    public internet are the documented connection options.
+  replay_protection: none documented
+gaps:
+- No published AsyncAPI, event catalog page, or JSON Schema for any event.
+- No self-serve endpoint management, no delivery log, no manual replay.
+- No signature verification for callback authenticity.
+- Duplicate delivery is possible (retries) with no idempotency key on the inbound side.

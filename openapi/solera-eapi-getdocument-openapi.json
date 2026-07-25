@@ -1,0 +1,252 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "EAPI Get Document API",
+    "description": "",
+    "contact": {
+      "name": "Solera",
+      "url": "http://www.audatex.us/product.asp?pageid=zContact_us"
+    },
+    "license": {
+      "name": "@SoleraNorth America, Inc. All rights reserved",
+      "url": "http://www.audatex.us/"
+    }
+  },
+  "servers": [
+    {
+      "url": "/TestGetDocumentapi"
+    }
+  ],
+  "paths": {
+    "/api/v2/GetDocument/{assignmentId}/{locator}": {
+      "get": {
+        "tags": [
+          "GetDocument"
+        ],
+        "summary": "( Example assignmentId - 332067651 , locator - 8a4a7758-f035-49b7-aa76-69280128123b  )",
+        "parameters": [
+          {
+            "name": "assignmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locator",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Gets valuation return",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query parameter(s). Read the response description"
+          },
+          "401": {
+            "description": "Authorization has been denied for this request"
+          }
+        }
+      }
+    },
+    "/api/v2/{type}": {
+      "get": {
+        "tags": [
+          "GetDocument"
+        ],
+        "summary": "Example of decoded attached image/pdf files",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Gets valuation return",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query parameter(s). Read the response description"
+          },
+          "401": {
+            "description": "Authorization has been denied for this request"
+          }
+        }
+      }
+    },
+    "/api/v2/valuation/{type}/{processId}": {
+      "get": {
+        "tags": [
+          "ValuationReturn"
+        ],
+        "summary": "( Example processId - 67302420-1 , types - xml pdf)",
+        "parameters": [
+          {
+            "name": "processId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Gets valuation return",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query parameter(s). Read the response description"
+          },
+          "401": {
+            "description": "Authorization has been denied for this request"
+          }
+        }
+      }
+    },
+    "/api/v2/valuation/{type}": {
+      "get": {
+        "tags": [
+          "ValuationReturn"
+        ],
+        "summary": "Gets a decoded file",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets valuation return",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid query parameter(s). Read the response description"
+          },
+          "401": {
+            "description": "Authorization has been denied for this request"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "description": "Authorization using the JWT Bearer scheme",
+        "flows": {
+          "password": {
+            "tokenUrl": "https://dispatch-login-demo.audatex.com/connect/token",
+            "scopes": {
+              "b2b.fnol.api": "Audatex Assignment API Access"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        "readAccess",
+        "writeAccess"
+      ]
+    }
+  ]
+}

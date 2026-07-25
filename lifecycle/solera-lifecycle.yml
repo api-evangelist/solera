@@ -1,0 +1,109 @@
+generated: '2026-07-25'
+method: searched
+source: |
+  Audatex Estimate Document Return API Integration Guide (PDF, sections 9-12), Claim
+  Image Document Return API Integration Guide (PDF), GIC - Image Capture API Integration
+  Guide (DOCX), and the version surfaces declared in openapi/*.json.
+versioning:
+  scheme: uri-path
+  detail: |
+    Version is carried in the URI path (/api/v1/..., /api/v2/...). Several surfaces
+    additionally template the segment as /api/v{version}/ and require an explicit
+    api-version parameter — as a query parameter on the GetDocuments and ClaimImages
+    production surfaces (default "2.0") and as a header on the GetImage surface.
+  current:
+  - api: Solera Dashboard Assignment API
+    version: '2.0'
+    older_still_served: '1.0'
+  - api: ClaimImages API
+    version: '2.0'
+  - api: Audatex GetDocuments API
+    version: '2.0'
+    older_still_served: '1.0'
+  - api: Audatex Assignment Get Document API (GetImage)
+    version: '2.0'
+    older_still_served: '1.0'
+  - api: EAPI Get Document API
+    version: '2.0'
+  - api: EAPI GIC Integration API
+    version: '1.0'
+  version_endpoints:
+  - openapi/solera-getdocuments-v1-openapi.json#GET /api/Version
+  - openapi/solera-gic-integration-openapi.json#GET /api/Version
+  - openapi/solera-getimage-v2-openapi.json#GET /api/v{version}
+  note: Every Swagger UI on the API hosts exposes a version picker listing the versions
+    still served side by side, so old major versions are visibly retained rather than
+    removed.
+environments:
+- name: production
+  api_host: https://api-prod.audatex.com
+  identity_host: https://dispatch-login.audatex.com
+  egress_ip: 170.76.172.20
+- name: demo / UAT
+  api_host: https://api-demo.audatex.com
+  identity_host: https://dispatch-login-demo.audatex.com
+  egress_ip: 170.76.172.18
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  note: |
+    No deprecation policy, no Sunset or Deprecation header support, and no end-of-life
+    schedule appears in any Solera or Audatex public integration document. Older major
+    versions are simply left served (Assignment 1.0, GetDocuments 1.0, GetImage 1.0
+    still return 200) with no stated retirement commitment. No `Deprecation` pointer is
+    emitted because no policy is published.
+deprecated_operations: []
+availability:
+  published: true
+  source: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  hosting_hours:
+  - region: United States
+    window: 06:30 EST to 00:00 EST, Monday through Saturday; 10:00 EST to 14:00 EST Sunday
+  - region: Canada
+    window: 06:30 EST to 00:00 EST, Monday through Saturday; 10:00 EST to 14:00 EST Sunday
+  caveat: '"Services may be available outside of these time frames, but availability is
+    subject to maintenance."'
+  uptime_target: null
+  sla_url: null
+  note: |
+    Audatex publishes hours of operation rather than an uptime SLA. This is a materially
+    weaker availability commitment than a 24/7 target — the documented window explicitly
+    excludes roughly six and a half hours a day and most of Sunday.
+maintenance:
+  scheduled: '"Audatex reserves the right to do maintenance whenever necessary. Audatex
+    will strive to limit downtime during normal business hours as outlined in Hours of
+    Operation. Maintenance will normally be scheduled throughout the week."'
+  emergency: '"If emergency maintenance is required, Audatex reserves the right to provide
+    the maintenance with minimal impact on the user community."'
+  advance_notice: null
+status_page: null
+status_page_note: |
+  No status page exists. status.solera.com and status.audatex.com do not resolve;
+  /status on solera.com returns 404. Incident and maintenance communication is by
+  account representative and support case only, so no `StatusPage` pointer is emitted.
+onboarding_lifecycle:
+  steps:
+  - Meet pre-requisites (consume and expose JSON/RESTful APIs; segregated dev + test
+    environment)
+  - Review technical specifications
+  - Develop integration services on the client side
+  - Establish a secure connection (IP allowlist, VPN, or SSL over the internet)
+  - Test connectivity and data flow (System Integration Testing)
+  - Complete User Acceptance Testing in the Audatex test environment
+  - Go live
+  go_live_lead_time: '"A production implementation can be scheduled no earlier than 5
+    business days after the UAT signoff from the Audatex client."'
+  kickoff: Audatex account representative schedules and hosts a kickoff meeting to
+    introduce technical resources and review the implementation timeline.
+support:
+  hours: 08:00-20:00 EST Monday-Friday; 09:00-13:00 EST Saturday
+  self_service: https://www.mysupportgarage.com
+  training: https://www.training.audatex.us
+  email:
+  - AXUS.AASupportContact@audatex.com
+  - canadatechsupport@audatex.com
+  phone:
+  - '1-800-669-4237 (United States)'
+  - '1-866-420-2048 (Canada)'
+  response_target: Emails receive a response within 1-2 business days.

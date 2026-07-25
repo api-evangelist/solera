@@ -1,0 +1,180 @@
+generated: '2026-07-25'
+method: derived
+source: openapi/*.json components.schemas and definitions, path parameters, and the data
+  dictionaries in the Estimate Return / Claim Image / GIC integration guides
+domain: automobile physical damage claims (assignment dispatch, estimate return, claim
+  image and document retrieval)
+note: |
+  Solera / Audatex publish no object reference and no id-prefix scheme. This graph is
+  derived from the schemas that ARE in the specs plus the data dictionaries in the PDF
+  guides. The domain core is deliberately thin in the API layer because the substantive
+  payload is a Base64-encoded CIECA BMS 5.7 document carried inside body.content /
+  body.payload — the real entity model lives in the BMS schema on cieca.com, not in these
+  specifications.
+entities:
+- name: Assignment
+  description: A dispatch of an automobile physical damage claim to Audatex for estimating.
+    Created by POSTing a CIECA BMS AssignmentAddRq.
+  identifier: assignmentId / workAssignmentID (numeric string, e.g. 332067651)
+  schema: openapi/solera-dashboard-assignment-openapi.json#/components/schemas/AddAssignmentRequest
+  fields:
+  - header.messageType (Audatex.Assignment)
+  - body.bmsVer (5.7.0)
+  - body.claimNumber
+  - body.content (Base64-encoded CIECA BMS AssignmentAddRq)
+  - responseRoute
+- name: Claim
+  description: The insurer-side claim an assignment belongs to. Present only as a number
+    carried through every message and response.
+  identifier: claimNumber (client-supplied, e.g. 5101762, 1DEMO03032022)
+  schema: openapi/solera-getdocuments-v1-openapi.json#/components/schemas/DocumentResponseBody
+- name: ResponseRoute
+  description: The client-hosted callback contract supplied at assignment time — where
+    Audatex should push acknowledgements, estimate returns and claim image returns, and
+    how it should authenticate to do so.
+  schema: openapi/solera-dashboard-assignment-openapi.json#/components/schemas/ResponseRouteRequest
+  fields:
+  - authorization.href
+  - authorization.body.client_Id
+  - authorization.body.client_Secret
+  - authorization.body.audience
+  - authorization.body.scope
+  - responseMessage[].type (Assignment | EstimateReturn | ClaimImageReturn)
+  - responseMessage[].href
+- name: EstimateCompleteEvent
+  description: The HATEOAS message Audatex POSTs to the client when an Audatex Estimate
+    (ADXE) completes, carrying links to every retrievable document.
+  identifier: Header.Rquid + Header.Cid
+  schema: asyncapi/solera-eapi-asyncapi.yml (generated from the published data dictionary
+    and sample payloads)
+  fields:
+  - Header.Rquid
+  - Header.Cid
+  - Header.MessageType (Audatex.Event.EstimateComplete)
+  - Body.ClaimNumber
+  - Body.Links[]
+  - Body.PassThroughData
+- name: DocumentLink
+  description: One hypermedia link inside an EstimateCompleteEvent pointing at a
+    retrievable document.
+  fields:
+  - Rel (claimXml | printImages | attachments | claimImage)
+  - Method (GET)
+  - Href
+  - Type (application/json)
+  - Info.Notation
+  - Info.FileType
+  - Info.Extension
+  - Info.AttachmentDatetime
+  - Info.EstimateId
+- name: Document
+  description: A retrievable claim artifact — estimate XML, print image, or attachment —
+    returned Base64-encoded rather than as a binary stream.
+  identifier: locator (GUID, e.g. 8a4a7758-f035-49b7-aa76-69280128123b)
+  schema: openapi/solera-getdocuments-v1-openapi.json#/components/schemas/DocumentResponse
+  fields:
+  - header.cid
+  - header.statusCode
+  - body.claimNumber
+  - body.createdForProfileId
+  - body.imageId
+  - body.attachmentId
+  - body.requestNbr
+  - body.extension
+  - body.payload (Base64)
+  - body.dataType (XML.Base64 | pdf.Base64)
+- name: ClaimImage
+  description: A photograph or scanned document attached to a claim.
+  identifier: ClaimImage / imageId (GUID, e.g. C293B120-A763-404E-AC9D-2A687128D3DC)
+  schema: openapi/solera-claim-images-prod-swagger.json#/definitions/FileResult
+- name: Valuation
+  description: A total-loss or market valuation document retrievable by process id and
+    type.
+  identifier: processId (e.g. 67302420-1)
+  schema: openapi/solera-getdocuments-v1-openapi.json#/components/schemas/ValuationResponse
+  fields:
+  - header.cid
+  - header.statusCode
+  - body.claimNumber
+  - body.payload
+  - body.dataType
+  - body.extension
+- name: Profile
+  description: The Audatex account/office a claim artifact was created under.
+  identifier: createdForProfileId (e.g. 196TEST0037)
+- name: M31Event
+  description: Mobile image-upload-completed event raised by Audatex Estimate (ADXE) when
+    images captured on the mobile client finish uploading.
+  identifier: id (GUID) + eventCode M31
+  fields:
+  - messageType (adxe.estimate.image-upload-for-mobile-completed)
+  - routingKey
+  - id
+  - body.workAssignmentId
+  - body.createdForProfileId
+  - body.eventSource
+  - body.eventCode (M31)
+  - body.eventTime
+  - body.estimateStatus
+  - body.claimNo
+  - body.claimId
+relationships:
+- from: Assignment
+  to: Claim
+  type: belongs_to
+  via: body.claimNumber
+- from: Assignment
+  to: ResponseRoute
+  type: has_one
+  via: responseRoute
+- from: ResponseRoute
+  to: Authorization
+  type: has_one
+  via: authorization
+- from: ResponseRoute
+  to: ResponseMessage
+  type: has_many
+  via: responseMessage[]
+- from: EstimateCompleteEvent
+  to: Assignment
+  type: belongs_to
+  via: Header.Rquid (the client's BMS AssignmentRq RQUID)
+- from: EstimateCompleteEvent
+  to: Claim
+  type: belongs_to
+  via: Body.ClaimNumber
+- from: EstimateCompleteEvent
+  to: DocumentLink
+  type: has_many
+  via: Body.Links[]
+- from: DocumentLink
+  to: Document
+  type: has_one
+  via: Href (resolves to GET /api/v{version}/claims/{assignmentId}/document/{locator})
+- from: Document
+  to: Claim
+  type: belongs_to
+  via: body.claimNumber
+- from: Document
+  to: Profile
+  type: belongs_to
+  via: body.createdForProfileId
+- from: ClaimImage
+  to: Claim
+  type: belongs_to
+  via: claimNumber
+- from: Valuation
+  to: Claim
+  type: belongs_to
+  via: body.claimNumber
+- from: M31Event
+  to: Assignment
+  type: belongs_to
+  via: body.workAssignmentId
+external_model:
+  standard: CIECA BMS 5.7
+  note: The assignment request body and the estimate return document are CIECA BMS 5.7
+    XML, Base64-encoded into the JSON envelope. Audatex states it "does not support all
+    fields available in the CIECA BMS"; the authoritative field-level model is the BMS
+    5.7 schema distributed to CIECA members at cieca.com.
+  url: https://www.cieca.com/

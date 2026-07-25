@@ -1,0 +1,95 @@
+generated: '2026-07-25'
+method: derived
+source: openapi/*.json 4xx/5xx responses, plus the response envelope documented in the
+  Estimate Document Return and Claim Image Document Return integration guides
+format: none
+format_note: |
+  Solera / Audatex do NOT use RFC 9457 problem+json. No harvested specification declares
+  an application/problem+json media type and no error schema is defined anywhere. Every
+  documented failure is a bare HTTP status code with a prose description and no body
+  schema. Successful responses use a bespoke envelope — {"header": {"cid", "statusCode"},
+  "body": {...}} — and header.statusCode ("OK" in the published sample) is the only
+  application-level status signal the public documentation exposes.
+envelope:
+  shape: header/body
+  fields:
+  - field: header.cid
+    description: Correlation identifier echoed back on the response.
+  - field: header.statusCode
+    description: Application-level status string. The integration guides publish only the
+      "OK" value; no failure vocabulary is documented.
+  source: openapi/solera-getdocuments-v1-openapi.json#/components/schemas/DocumentResponseHeader
+problems:
+- status: 400
+  title: The assignment data is invalid
+  description: The submitted assignment payload failed validation. The body carries a
+    Base64-encoded CIECA BMS AssignmentAddRq; malformed BMS content or a missing bmsVer
+    is the common cause.
+  media_type: none
+  source_operations:
+  - openapi/solera-dashboard-assignment-openapi.json#AddAssignment
+  - openapi/solera-enterprise-assignment-prod-swagger.json#AddAssignment
+- status: 400
+  title: The ClaimImage is invalid
+  description: The ClaimImage path identifier is not a well-formed or resolvable claim
+    image locator (GUID form, e.g. C293B120-A763-404E-AC9D-2A687128D3DC).
+  media_type: none
+  source_operations:
+  - openapi/solera-claim-images-openapi.json#GET /api/v2/image/{ClaimImage}
+  - openapi/solera-claim-images-prod-swagger.json#valuationReturn
+- status: 400
+  title: The type is invalid
+  description: The requested document type is not one the endpoint decodes (published
+    examples are xml and pdf).
+  media_type: none
+  source_operations:
+  - openapi/solera-claim-images-openapi.json#GET /api/v2/decodedFile
+  - openapi/solera-claim-images-prod-swagger.json#decodeImage
+- status: 400
+  title: Invalid query parameter(s). Read the response description
+  description: One or more path/query parameters on the EAPI Get Document surface failed
+    validation. The response description carries the detail; there is no machine-readable
+    error body.
+  media_type: none
+  source_operations:
+  - openapi/solera-eapi-getdocument-openapi.json#GET /api/v2/GetDocument/{assignmentId}/{locator}
+  - openapi/solera-eapi-getdocument-openapi.json#GET /api/v2/{type}
+  - openapi/solera-eapi-getdocument-openapi.json#GET /api/v2/valuation/{type}/{processId}
+  - openapi/solera-eapi-getdocument-openapi.json#GET /api/v2/valuation/{type}
+- status: 401
+  title: The authentication token is either missing or invalid
+  description: No Authorization header, or an expired/incorrect bearer token. Tokens are
+    issued by the Audatex IdentityServer at /connect/token with expires_in 43200 seconds
+    (12 hours) in the published sample; re-request a token and retry.
+  remediation: POST to https://dispatch-login.audatex.com/connect/token (production) or
+    https://dispatch-login-demo.audatex.com/connect/token (UAT) with the provisioned
+    client_id/secret and the scope the target API requires.
+  media_type: none
+  source_operations:
+  - openapi/solera-claim-images-openapi.json#GET /api/v2/image/{ClaimImage}
+  - openapi/solera-claim-images-openapi.json#GET /api/v2/decodedFile
+  - openapi/solera-claim-images-prod-swagger.json#valuationReturn
+  - openapi/solera-claim-images-prod-swagger.json#decodeImage
+  - openapi/solera-dashboard-assignment-openapi.json#AddAssignment
+  - openapi/solera-enterprise-assignment-prod-swagger.json#AddAssignment
+- status: 401
+  title: Authorization has been denied for this request
+  description: The bearer token is present but does not carry the scope the EAPI Get
+    Document surface requires, or the caller is not provisioned for the assignment.
+  remediation: Request a token with the correct scope (b2b.fnol.api for assignment/claim
+    image surfaces, b2b.fnol.documents for document retrieval). Multiple scopes may be
+    requested on one token, space separated.
+  media_type: none
+  source_operations:
+  - openapi/solera-eapi-getdocument-openapi.json#GET /api/v2/GetDocument/{assignmentId}/{locator}
+  - openapi/solera-eapi-getdocument-openapi.json#GET /api/v2/{type}
+  - openapi/solera-eapi-getdocument-openapi.json#GET /api/v2/valuation/{type}/{processId}
+  - openapi/solera-eapi-getdocument-openapi.json#GET /api/v2/valuation/{type}
+gaps:
+- No 403, 404, 409, 429 or 5xx response is declared on any operation in any harvested
+  specification.
+- No error code registry, no error body schema, and no rate-limit error semantics are
+  published.
+- Delivery failures on the outbound callback leg are not surfaced to the client as API
+  errors; a client endpoint that does not return "success" is retried and then routed to
+  an Audatex-side reject queue (see conventions/solera-conventions.yml).

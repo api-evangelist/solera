@@ -1,0 +1,97 @@
+generated: '2026-07-25'
+method: searched
+source: Revision History tables in the Audatex integration guides published at
+  https://na.api.solera.com/files/
+scheme: document-revision-history
+scheme_note: |
+  Solera / Audatex publish no API changelog, no release-notes feed, and no dated "what's
+  new" page — there is no developer portal to host one. What IS published is a Revision
+  History table at the front of each integration guide, versioning the DOCUMENT rather
+  than the API. That is the only dated change record the company exposes publicly, and it
+  is captured verbatim here. Version drift in the APIs themselves is only observable by
+  diffing the Swagger UI version pickers on api-demo/api-prod.audatex.com.
+current:
+  Estimate Document Return API Integration Guide: '1.4'
+  Claim Image Document Return API Integration Guide: '1.0'
+  GIC - Image Capture API Integration Guide: '1.0'
+documents:
+- name: Estimate Document Return API Integration Guide
+  url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  entries:
+  - version: '1.4'
+    date: '2020-06-02'
+    author: T.R., Audatex
+    notes: Updated JSON sample text
+    breaking: false
+  - version: '1.3'
+    date: '2020-01-08'
+    author: T.R.
+    notes: Formatting changes
+    breaking: false
+  - version: '1.2'
+    date: '2019-01-09'
+    author: T.R., Audatex
+    notes: Updated API Spec with latest reference content and format
+    breaking: false
+    note: Date as printed in the source table; it is out of sequence with version 1.1
+      (2019-08-26) in the published document.
+  - version: '1.1'
+    date: '2019-08-26'
+    author: J.H., Audatex
+    notes: Updated the API Spec and Legal Statement
+    breaking: false
+  - version: '1.0'
+    date: '2019-04-14'
+    author: J.H., Audatex
+    notes: Internally approved version
+    breaking: false
+- name: Claim Image Document Return API Integration Guide
+  url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  entries:
+  - version: '1.0'
+    date: '2022-03-25'
+    author: K.Y, Audatex
+    notes: Version 1.0
+    breaking: false
+- name: GIC - Image Capture API Integration Guide
+  url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  entries:
+  - version: '1.0'
+    date: '2022-06-29'
+    author: A.S, Audatex
+    notes: Version 1.0
+    breaking: false
+api_version_observations:
+  observed: '2026-07-25'
+  note: Versions currently served side by side by the Swagger UI version pickers.
+  surfaces:
+  - api: Solera Dashboard Assignment API / Solera Enterprise API
+    versions:
+    - '1.0'
+    - '2.0'
+    note: 1.0 exposes only GET /api/Version on demo and is empty on production; 2.0 is the
+      live surface.
+  - api: ClaimImages API
+    versions:
+    - '2.0'
+  - api: Audatex GetDocuments API
+    versions:
+    - '1.0'
+    - '2.0'
+    note: 2.0 narrows to a single valuation-document operation; the document and valuation
+      retrieval operations remain on 1.0.
+  - api: Audatex Assignment Get Document API (GetImage)
+    versions:
+    - '1.0'
+    - '2.0'
+  - api: EAPI Get Document API
+    versions:
+    - '2.0'
+  - api: EAPI GIC Integration API
+    versions:
+    - '1.0'
+gaps:
+- No RSS/Atom or JSON changelog feed.
+- No per-release notes for the APIs themselves, only for the guide documents.
+- No breaking-change notice mechanism; see lifecycle/solera-lifecycle.yml (no deprecation
+  policy, no Sunset header).

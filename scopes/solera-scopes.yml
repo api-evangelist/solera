@@ -1,0 +1,86 @@
+generated: '2026-07-25'
+method: derived
+source: openapi/solera-claim-images-openapi.json, openapi/solera-claim-images-prod-swagger.json,
+  openapi/solera-dashboard-assignment-openapi.json, openapi/solera-eapi-getdocument-openapi.json,
+  openapi/solera-enterprise-assignment-prod-swagger.json, openapi/solera-getdocuments-v1-openapi.json,
+  openapi/solera-getdocuments-v2-openapi.json, openapi/solera-gic-integration-openapi.json
+schemes:
+- name: oauth2
+  source: openapi/solera-claim-images-openapi.json
+  flows:
+  - flow: password
+    tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+  description: Authorization using the JWT Bearer scheme
+- name: oauth2
+  source: openapi/solera-claim-images-prod-swagger.json
+  flows:
+  - flow: password
+    tokenUrl: https://dispatch-login.audatex.com/connect/token
+  description: Authorization using the JWT Bearer scheme
+- name: oauth2
+  source: openapi/solera-dashboard-assignment-openapi.json
+  flows:
+  - flow: password
+    tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+  description: Authorization using the JWT Bearer scheme
+- name: oauth2
+  source: openapi/solera-eapi-getdocument-openapi.json
+  flows:
+  - flow: password
+    tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+  description: Authorization using the JWT Bearer scheme
+- name: oauth2
+  source: openapi/solera-enterprise-assignment-prod-swagger.json
+  flows:
+  - flow: password
+    tokenUrl: https://dispatch-login.audatex.com/connect/token
+  description: Authorization using the JWT Bearer scheme
+- name: oauth2
+  source: openapi/solera-getdocuments-v1-openapi.json
+  flows:
+  - flow: password
+    tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+- name: oauth2
+  source: openapi/solera-getdocuments-v2-openapi.json
+  flows:
+  - flow: password
+    tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+- name: oauth2
+  source: openapi/solera-gic-integration-openapi.json
+  flows:
+  - flow: password
+    tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+  description: Authorization using the JWT Bearer scheme
+scopes:
+- scope: b2b.fnol.api
+  description: Audatex Assignment API Access
+  flows:
+  - password
+  sources:
+  - openapi/solera-claim-images-openapi.json
+  - openapi/solera-claim-images-prod-swagger.json
+  - openapi/solera-dashboard-assignment-openapi.json
+  - openapi/solera-eapi-getdocument-openapi.json
+  - openapi/solera-enterprise-assignment-prod-swagger.json
+  - openapi/solera-gic-integration-openapi.json
+- scope: b2b.fnol.documents
+  description: Audatex Assignment API Access
+  flows:
+  - password
+  sources:
+  - openapi/solera-getdocuments-v1-openapi.json
+  - openapi/solera-getdocuments-v2-openapi.json
+- scope: readAccess
+  sources:
+  - openapi/solera-dashboard-assignment-openapi.json
+  - openapi/solera-eapi-getdocument-openapi.json
+  - openapi/solera-getdocuments-v1-openapi.json
+  - openapi/solera-getdocuments-v2-openapi.json
+  - openapi/solera-gic-integration-openapi.json
+- scope: writeAccess
+  sources:
+  - openapi/solera-dashboard-assignment-openapi.json
+  - openapi/solera-eapi-getdocument-openapi.json
+  - openapi/solera-getdocuments-v1-openapi.json
+  - openapi/solera-getdocuments-v2-openapi.json
+  - openapi/solera-gic-integration-openapi.json

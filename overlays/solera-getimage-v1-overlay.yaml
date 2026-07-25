@@ -1,0 +1,34 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Audatex Assignment Get Document API
+  version: 1.0.0
+extends: openapi/solera-getimage-v1-openapi.json
+x-apievangelist-generated: '2026-07-25'
+x-apievangelist-method: generated
+actions:
+- target: $.info
+  description: Record the API Evangelist enrichment stamp and the real production/demo hosts, which the
+    harvested document expresses only as a relative server path.
+  update:
+    x-apievangelist-enriched: '2026-07-25'
+    x-apievangelist-provider: solera
+    x-apievangelist-source: harvested verbatim from the anonymously readable Audatex Swagger UI
+    x-apievangelist-onboarding: provisioned B2B — no self-serve signup or public API key; an Audatex account
+      representative provisions the client through a 7-step onboarding with UAT signoff
+    x-apievangelist-standard: CIECA BMS 5.7 (Audatex is a CIECA Corporate Technology member; BMS support
+      is partial)
+    x-apievangelist-artifacts:
+      authentication: authentication/solera-authentication.yml
+      scopes: scopes/solera-scopes.yml
+      conventions: conventions/solera-conventions.yml
+      errors: errors/solera-problem-types.yml
+      lifecycle: lifecycle/solera-lifecycle.yml
+      sandbox: sandbox/solera-sandbox.yml
+      events: asyncapi/solera-eapi-asyncapi.yml
+      data_model: data-model/solera-data-model.yml
+      agentic_access: agentic-access/solera-agentic-access.yml
+- target: $.paths['/api/v{version}/claims/document/{locator}'].get
+  description: The harvested document omits an operationId for this operation; supply a stable one so
+    the operation can be referenced from workflows, skills and tool crosswalks.
+  update:
+    operationId: getClaimImageDocument

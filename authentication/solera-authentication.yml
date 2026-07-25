@@ -1,0 +1,40 @@
+generated: '2026-07-25'
+method: derived
+source: openapi/solera-claim-images-openapi.json, openapi/solera-claim-images-prod-swagger.json,
+  openapi/solera-dashboard-assignment-openapi.json, openapi/solera-eapi-getdocument-openapi.json,
+  openapi/solera-enterprise-assignment-prod-swagger.json, openapi/solera-getdocuments-v1-openapi.json,
+  openapi/solera-getdocuments-v2-openapi.json, openapi/solera-getimage-v1-openapi.json, openapi/solera-getimage-v2-openapi.json,
+  openapi/solera-gic-integration-openapi.json
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - password
+schemes:
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: password
+    tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+    scopes: 1
+  description: Authorization using the JWT Bearer scheme
+  sources:
+  - openapi/solera-claim-images-openapi.json
+  - openapi/solera-claim-images-prod-swagger.json
+  - openapi/solera-dashboard-assignment-openapi.json
+  - openapi/solera-eapi-getdocument-openapi.json
+  - openapi/solera-enterprise-assignment-prod-swagger.json
+  - openapi/solera-getdocuments-v1-openapi.json
+  - openapi/solera-getdocuments-v2-openapi.json
+  - openapi/solera-gic-integration-openapi.json
+- name: Bearer
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: Authorization header using the Bearer scheme
+  sources:
+  - openapi/solera-getimage-v1-openapi.json
+  - openapi/solera-getimage-v2-openapi.json

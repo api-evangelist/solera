@@ -1,0 +1,131 @@
+generated: '2026-07-25'
+method: searched
+source: |
+  Audatex Estimate Document Return API Integration Guide (PDF), Claim Image Document
+  Return API Integration Guide (PDF), GIC - Image Capture API Integration Guide (DOCX),
+  the ten harvested specifications in openapi/, and the OIDC discovery documents in
+  well-known/.
+authentication:
+  style: OAuth 2.0 bearer token, with HTTP Basic authentication offered as an alternative
+  detail: |
+    "The following are the supported authentication methods from which one of them can be
+    selected: Basic Authorization, OAuth." Tokens are minted at
+    https://dispatch-login.audatex.com/connect/token (production) or
+    https://dispatch-login-demo.audatex.com/connect/token (UAT), POSTed as
+    application/x-www-form-urlencoded. The published server-to-server pattern is
+    grant_type=client_credentials with a provisioned client_id (documented example:
+    b2b.fnol) plus a scope; the harvested specs declare the resource-owner password flow.
+    Multiple scopes may be requested on a single token, space separated, so one token can
+    serve the Assignment API and the document-return APIs together.
+  header: 'Authorization: Bearer <access_token>'
+  token_ttl_seconds: 43200
+  token_ttl_note: expires_in 43200 (12 hours) in the published sample auth response; the
+    value is issued per client and is not contractually fixed in the documentation.
+  see: authentication/solera-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  note: |
+    Solera / Audatex document NO idempotency contract. There is no Idempotency-Key
+    header, no request-replay window, and no statement of at-most-once semantics on
+    POST /api/v2/assignments. The closest published construct is the CIECA BMS RQUID
+    (echoed back on the callback as Header.Rquid) plus a Cid correlation id, but the
+    guides describe these as correlation identifiers, not deduplication keys, and never
+    state that resubmitting the same RQUID is safe. Because the outbound callback leg is
+    explicitly retried (3 attempts), client-side receivers must be prepared for duplicate
+    delivery of the same event even though the inbound leg offers no idempotency key.
+    No `Idempotency` pointer is emitted — nothing idempotency-shaped is actually
+    published.
+pagination:
+  supported: false
+  note: Every harvested operation is a single-resource fetch or a single message post.
+    No list endpoint, no page/limit/cursor parameter, and no pagination envelope appears
+    in any specification.
+filtering_expansion:
+  supported: false
+  note: No expand, fields, or sparse-fieldset parameter is documented.
+request_tracing:
+  correlation_ids:
+  - id: Rquid
+    where: HTTP header and message Header.Rquid
+    description: The client's CIECA BMS AssignmentRq RQUID, echoed on the estimate-complete
+      and claim-image callbacks so a client can tie an event back to the assignment it
+      submitted.
+  - id: Cid
+    where: message Header.Cid and response header.cid
+    description: Audatex correlation identifier carried on both the callback message and
+      the document-retrieval response envelope.
+  - id: MessageType
+    where: HTTP header and message Header.MessageType
+    description: Event type discriminator, e.g. Audatex.Event.EstimateComplete.
+  note: There is no X-Request-Id / trace-id header contract and no documented way to look
+    up a request by id in support.
+versioning:
+  style: uri-path (/api/v1/, /api/v2/) with an explicit api-version parameter on several
+    surfaces (query on GetDocuments/ClaimImages, header on GetImage)
+  see: lifecycle/solera-lifecycle.yml
+error_envelope:
+  style: bare HTTP status code with a prose description; no error body schema
+  success_envelope: '{"header": {"cid", "statusCode"}, "body": {...}}'
+  rfc9457: false
+  see: errors/solera-problem-types.yml
+rate_limiting:
+  documented: false
+  headers: []
+  note: |
+    No rate limit, quota, burst policy, or 429 response is documented anywhere. What IS
+    published instead is an availability window (hours of operation) and an IP-allowlist
+    model — capacity is managed by provisioning and contract, not by a published
+    per-client rate limit. See lifecycle/solera-lifecycle.yml.
+delivery_semantics:
+  direction: |
+    The integration is bidirectional and callback-shaped. The client POSTs an assignment
+    to Audatex; Audatex later authenticates AGAINST THE CLIENT'S API and POSTs a HATEOAS
+    message to a client-specified endpoint; the client then authenticates back to Audatex
+    and GETs each referenced document.
+  retry:
+  - surface: Estimate / Claim Image return callback
+    attempts: 3
+    timeout_seconds: 15
+    on_exhaustion: message is routed to an Audatex-side reject queue
+    quote: '"Audatex will retry up to 3 times when it doesn''t get \"success\" from the
+      customer service, using the default timeout which is 15 seconds, after that it will
+      go to the reject queue."'
+  - surface: GIC M31 image-upload event
+    attempts: 3
+    interval_seconds: 10
+    on_exhaustion: message is routed to the reject queue
+    quote: '"Audatex will retry up to 3 times every 10 seconds when it doesn''t get
+      \"success\" from the customer service, after that it will go to the reject queue."'
+  notifications: '"We may enable the sending of email notifications upon request."'
+  at_least_once: true
+  ordering: not documented
+  signature_verification: |
+    None. Callback authenticity rests on Audatex authenticating to the CLIENT with
+    credentials the client supplied in the assignment request (responseRoute.authorization),
+    plus optional IP allowlisting of the Audatex egress addresses — there is no webhook
+    signature header.
+content_negotiation:
+  request: application/json (also application/json-patch+json, text/json, application/*+json
+    on the assignment endpoint); token requests use application/x-www-form-urlencoded
+  response: application/json, text/json, text/plain
+  binary_payloads: |
+    Documents and images are not returned as binary streams; they are Base64-encoded into
+    body.payload with body.extension and body.dataType (published values: "XML.Base64",
+    "pdf.Base64") describing how to decode them. The assignment request carries the CIECA
+    BMS document the same way, Base64-encoded into body.content.
+transport_security:
+  tls_required: true
+  options:
+  - IP allowlisting of the Audatex Tanzu egress addresses (test 170.76.172.18, production
+    170.76.172.20)
+  - Site-to-site VPN between the two parties
+  - SSL over the public internet
+  see: security/solera-domain-security.yml
+cross_links:
+  errors: errors/solera-problem-types.yml
+  lifecycle: lifecycle/solera-lifecycle.yml
+  authentication: authentication/solera-authentication.yml
+  scopes: scopes/solera-scopes.yml
+  sandbox: sandbox/solera-sandbox.yml
+  events: asyncapi/solera-eapi-asyncapi.yml

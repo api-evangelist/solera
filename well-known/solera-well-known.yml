@@ -1,0 +1,81 @@
+generated: '2026-07-25'
+method: searched
+source: live probes of every apis.yml baseURL host, every OpenAPI servers[] host, the
+  docs/console host, and the Audatex IdentityServer hosts named in the integration guides
+note: |
+  Solera / Audatex publish no /.well-known/ discovery surface on the corporate site
+  (www.solera.com), on the partner integrations portal (na.api.solera.com), or on the
+  API hosts themselves (api-demo.audatex.com, api-prod.audatex.com). The single real
+  well-known surface is OpenID Connect discovery on the Audatex IdentityServer, which
+  is anonymously readable in BOTH the demo and the production environment. Both were
+  saved verbatim, along with the production JWKS.
+hosts:
+- host: https://dispatch-login.audatex.com
+  role: production Audatex IdentityServer (OAuth 2.0 / OIDC)
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: solera-openid-configuration.json
+  - path: /.well-known/openid-configuration/jwks
+    status: 200
+    file: solera-jwks.json
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://dispatch-login-demo.audatex.com
+  role: demo / UAT Audatex IdentityServer
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: solera-openid-configuration-demo.json
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+- host: https://api-demo.audatex.com
+  role: demo API host (Kong gateway)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://na.api.solera.com
+  role: Solera Integrations partner portal (login wall)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+- host: https://www.solera.com
+  role: corporate website
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 200
+    note: WordPress default (Disallow /wp-admin/). No AI/agent directives, no sitemap
+      of API resources.
+summary:
+  security_txt: false
+  openid_configuration: true
+  oauth_authorization_server: false
+  api_catalog: false
+  ai_plugin: false
+  llms_txt: false

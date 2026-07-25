@@ -1,0 +1,103 @@
+generated: '2026-07-25'
+method: searched
+source: |
+  Example identifiers published verbatim in the operation summaries of the anonymously
+  readable Audatex Swagger UI specs (openapi/*.json), plus the environment and IP-range
+  notes in the Estimate Document Return, Claim Image Document Return, and GIC Image
+  Capture integration guides.
+self_serve: false
+self_serve_note: |
+  There is no self-serve sandbox. Credentials are not issued from a portal — an Audatex
+  account representative provisions a client into the demo/UAT environment as part of the
+  7-step onboarding, and the client must operate "a segregated development and test
+  environment to complete Integration testing and UAT." What is publicly available
+  without credentials is the demo API host's Swagger UI, its machine-readable specs, and
+  the example record identifiers below.
+environments:
+- name: demo / UAT
+  api_host: https://api-demo.audatex.com
+  identity_host: https://dispatch-login-demo.audatex.com
+  token_endpoint: https://dispatch-login-demo.audatex.com/connect/token
+  audatex_egress_ip: 170.76.172.18
+  egress_label: Tanzu Test
+  anonymous_docs: true
+- name: production
+  api_host: https://api-prod.audatex.com
+  identity_host: https://dispatch-login.audatex.com
+  token_endpoint: https://dispatch-login.audatex.com/connect/token
+  audatex_egress_ip: 170.76.172.20
+  egress_label: Tanzu Prod
+  anonymous_docs: true
+  note: The production host serves the same Swagger UI and specifications anonymously;
+    only the data behind them is gated.
+test_identifiers:
+- name: ClaimImage
+  value: C293B120-A763-404E-AC9D-2A687128D3DC
+  used_by: GET /api/v2/image/{ClaimImage}
+  source: openapi/solera-claim-images-openapi.json (operation summary)
+- name: workAssignmentID (QA)
+  value: '290240018'
+  used_by: POST /api/v1/GICIntegration/{workAssignmentID}
+  source: openapi/solera-gic-integration-openapi.json (operation summary)
+- name: workAssignmentID (DEMO)
+  value: '332614611'
+  used_by: POST /api/v1/GICIntegration/{workAssignmentID}
+  source: openapi/solera-gic-integration-openapi.json (operation summary)
+- name: assignmentId
+  value: '332067651'
+  used_by: GET /api/v2/GetDocument/{assignmentId}/{locator}
+  source: openapi/solera-eapi-getdocument-openapi.json (operation summary)
+- name: locator
+  value: 8a4a7758-f035-49b7-aa76-69280128123b
+  used_by: GET /api/v2/GetDocument/{assignmentId}/{locator}
+  source: openapi/solera-eapi-getdocument-openapi.json (operation summary)
+- name: processId
+  value: 67302420-1
+  used_by: GET /api/v2/valuation/{type}/{processId}
+  source: openapi/solera-eapi-getdocument-openapi.json (operation summary)
+- name: valuation type
+  values:
+  - xml
+  - pdf
+  used_by: GET /api/v2/valuation/{type}/{processId}
+  source: openapi/solera-eapi-getdocument-openapi.json (operation summary)
+- name: imageCaptureId
+  value: A215EB8D-A9E7-4835-B68C-9F345DC687B0
+  used_by: POST-ImageAttachment (GIC image attachment message)
+  source: GIC - Image Capture API Integration Guide (DOCX)
+- name: claimNumber (sample)
+  values:
+  - '5101762'
+  - 1DEMO03032022
+  - V2-1PROD24022022
+  source: Estimate Return / Claim Image integration guide sample payloads
+- name: default claimNumber placeholder
+  value: My Default String Value
+  used_by: AddAssignmentRequestBody.claimNumber schema default
+  source: openapi/solera-dashboard-assignment-openapi.json
+sample_requests:
+- name: Sample assignment request message
+  operation: openapi/solera-dashboard-assignment-openapi.json#GET /api/v2/assignmentRequestMessage
+  description: The Assignment API exposes a live endpoint that RETURNS a sample assignment
+    message, so an integrator can see the exact expected shape without a fixture file.
+- name: Sample AssignmentAcks response
+  operation: openapi/solera-dashboard-assignment-openapi.json#POST /api/v2/assignmentAcks
+- name: Sample EstimateReturn response
+  operation: openapi/solera-dashboard-assignment-openapi.json#POST /api/v2/EstimateReturnResponse
+- name: Sample M31 event response
+  operation: openapi/solera-gic-integration-openapi.json#POST /api/v1/getM31EventAcks
+sample_credentials:
+  documented: true
+  client_id: b2b.fnol
+  scope: b2b.fnol.documents
+  grant_type: client_credentials
+  secret: provisioned per client — the guides show a placeholder secret value alongside
+    username/password fields marked XXXX. Not recorded here.
+  note: These are the documented example values from the integration guides. They are not
+    working credentials; a real client_id/secret and Audatex user id are issued by Audatex
+    Integrations during onboarding.
+not_published:
+- test clocks or time simulation
+- fixture/trigger tooling or a CLI to replay events
+- a self-serve sandbox key
+- test card / payment instruments (not a payments API)
