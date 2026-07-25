@@ -1,0 +1,329 @@
+aid: solera
+name: Solera
+review:
+  question: Does Solera publish a real, self-serve public developer portal and downloadable
+    API specifications for its insurance claims platform?
+  answer: partial
+  date: '2026-07-25'
+  reviewer: API Evangelist
+  homeMarket: United States
+  sector: Insurance
+  tier: claims-tech
+findings:
+  summary: |
+    Solera has no self-serve developer portal. There is no developer, developers,
+    docs, api, or apis subdomain on solera.com (all fail to resolve), and
+    /developers, /developer, /api, /partners and /integrations on www.solera.com
+    all return HTTP 404. The Solera Integrations portal at https://na.api.solera.com/
+    returns HTTP 200 but immediately redirects to /Login and renders an Audatex
+    branded "User ID / Password" sign-in form with no registration link, no plan
+    page, and no public API key issuance. That is a partner/agent login wall, not
+    a developer portal.
+
+    What IS genuinely public, and anonymously readable without credentials, is a
+    set of Swagger UI reference pages and machine readable OpenAPI 3.0.1 documents
+    on the Audatex demo API host (api-demo.audatex.com), plus PDF and DOCX
+    integration guides served under https://na.api.solera.com/files/. Three real
+    specs were harvested verbatim. Onboarding, however, remains provisioned and
+    partner-gated: the Estimate Document Return API Integration Guide states that
+    "Clients must work with Audatex to review the scope and requirements of the
+    integration" and describes an account-representative kickoff meeting, a
+    segregated client test environment, and UAT before go-live.
+
+    Solera does not underwrite risk. It is a claims-technology intermediary sitting
+    between property and casualty insurers and the repair/salvage/fleet economy —
+    exactly the software-and-risk-data layer the United States market seam predicts
+    would accrue the value, given there is no federal insurance regulator and no
+    open-insurance mandate to force carriers to expose anything.
+  developerPortal:
+    url: https://na.api.solera.com/
+    httpStatus: 200
+    effectiveURL: https://na.api.solera.com/Login?ReturnUrl=%2F
+    classification: partner/agent login wall
+    selfServe: false
+    registration: none found
+    note: Renders an Audatex "User ID" and "Password" sign-in form. Publicly readable
+      integration guides are served from the /files path on the same host without login.
+  probes:
+    - url: https://developer.solera.com
+      httpStatus: 0
+      note: DNS does not resolve.
+    - url: https://developers.solera.com
+      httpStatus: 0
+      note: DNS does not resolve.
+    - url: https://docs.solera.com
+      httpStatus: 0
+      note: DNS does not resolve.
+    - url: https://api.solera.com
+      httpStatus: 0
+      note: DNS does not resolve.
+    - url: https://apis.solera.com
+      httpStatus: 0
+      note: DNS does not resolve.
+    - url: https://www.solera.com/developers
+      httpStatus: 404
+    - url: https://www.solera.com/developer
+      httpStatus: 404
+    - url: https://www.solera.com/api
+      httpStatus: 404
+    - url: https://www.solera.com/partners
+      httpStatus: 404
+    - url: https://www.solera.com/integrations
+      httpStatus: 404
+    - url: https://www.solera.com/
+      httpStatus: 200
+      note: Corporate marketing site. Cloudflare bot protection returns 403 to
+        non-browser user agents.
+    - url: https://na.api.solera.com/
+      httpStatus: 200
+      note: Redirects to /Login. Login wall.
+    - url: https://na.api.solera.com/swagger/index.html
+      httpStatus: 404
+    - url: https://na.api.solera.com/swagger/v1/swagger.json
+      httpStatus: 404
+    - url: https://na.api.solera.com/openapi.json
+      httpStatus: 404
+    - url: https://na.api.solera.com/api-docs
+      httpStatus: 404
+    - url: https://na.api.solera.com/.well-known/openid-configuration
+      httpStatus: 404
+    - url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+      httpStatus: 200
+      note: Anonymous Swagger UI. Real API reference.
+    - url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+      httpStatus: 200
+      note: Anonymous Swagger UI. Real API reference.
+    - url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+      httpStatus: 200
+      note: Anonymous Swagger UI. Real API reference.
+    - url: https://api-prod.audatex.com/connect/token
+      httpStatus: 404
+      note: Host resolves. Documented production token endpoint; 404 on GET because
+        the endpoint is POST only.
+    - url: https://api.solera.world/
+      httpStatus: 0
+      note: DNS does not resolve. Referenced only in stale third-party search results.
+specs:
+  harvested: true
+  count: 3
+  provenance:
+    - file: openapi/solera-dashboard-assignment-openapi.json
+      title: Solera Dashboard Assignment API
+      version: '2.0'
+      format: OpenAPI 3.0.1
+      sourceURL: https://api-demo.audatex.com/TestAssignmentapi/docs/swaggerjson/v2
+      httpStatus: 200
+      contentType: application/json;charset=utf-8
+      bytes: 6429
+      fetched: '2026-07-25'
+      paths: 4
+      operations:
+        - POST /api/v2/assignments
+        - GET /api/v2/assignmentRequestMessage
+        - POST /api/v2/assignmentAcks
+        - POST /api/v2/EstimateReturnResponse
+      note: Discovered via the Swagger UI configObject on
+        https://api-demo.audatex.com/TestAssignmentapi/docs/index.html. Saved verbatim.
+    - file: openapi/solera-claim-images-openapi.json
+      title: ClaimImages API
+      version: '2.0'
+      format: OpenAPI 3.0.1
+      sourceURL: https://api-demo.audatex.com/TestClaimImageapi/docs/swaggerjson/v2
+      httpStatus: 200
+      contentType: application/json;charset=utf-8
+      bytes: 3059
+      fetched: '2026-07-25'
+      paths: 2
+      operations:
+        - GET /api/v2/image/{ClaimImage}
+        - GET /api/v2/decodedFile
+      note: Saved verbatim.
+    - file: openapi/solera-gic-integration-openapi.json
+      title: EAPI GIC Integration API
+      version: '1.0'
+      format: OpenAPI 3.0.1
+      sourceURL: https://api-demo.audatex.com/TestGICapi/docs/swaggerjson/v1
+      httpStatus: 200
+      contentType: application/json;charset=utf-8
+      bytes: 2468
+      fetched: '2026-07-25'
+      paths: 3
+      operations:
+        - POST /api/v1/GICIntegration/{workAssignmentID}
+        - POST /api/v1/getM31EventAcks
+        - GET /api/Version
+      note: Saved verbatim.
+  caveat: All three specs are served from the Audatex DEMO environment
+    (api-demo.audatex.com) and declare relative servers[].url values scoped to that
+    host. The Estimate Document Return API Integration Guide documents the matching
+    production host as https://api-prod.audatex.com/, which resolves but serves no
+    anonymous specification.
+acord:
+  posture: no ACORD reference found — CIECA BMS 5.7 instead
+  evidence: |
+    No occurrence of ACORD, AL3, ACORD XML, NGDS, IVANS, agency download, Applied
+    Epic or Vertafore AMS360 was found on solera.com, on na.api.solera.com, in the
+    three harvested OpenAPI documents, or in the Estimate Document Return and Claim
+    Image Document Return integration guides. Solera's published standards alignment
+    is CIECA, the auto physical damage sector's analogue to ACORD. The Estimate
+    Document Return API Integration Guide states verbatim: "Audatex is a Corporate
+    Technology member of Collision Industry Electronic Commerce Association ('CIECA')
+    and is licensed to use CIECA standards in its products." It further notes the
+    Audatex Estimate Return data mapping is derived from, but does not fully implement,
+    the CIECA BMS, and points integrators to the BMS 5.7 schema files on cieca.com.
+  standardsBody: CIECA (Collision Industry Electronic Commerce Association)
+  membership: Corporate Technology member (self-documented)
+  schema: CIECA BMS 5.7
+  source: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+insuranceVerbs:
+  quote: false
+  bind: false
+  issue: false
+  fnol: true
+  note: |
+    Solera is a claims-technology vendor, not a carrier, so quote/bind/issue do not
+    apply — there is no rating, quoting, or policy issuance surface. First notice of
+    loss IS exposed: the Dashboard Assignment API creates assignments and returns
+    estimate return responses, and the OAuth authorization server advertises
+    b2b.fnol.api, gofnol.api, b2b.fnol.documents and b2b.fnol.transformer scopes.
+    The audience is partner-only — insurer claim management systems, bodyshop
+    management systems, and TPAs, provisioned by a Solera account representative.
+    Not consumer-facing and not open agent-facing self-serve.
+auth:
+  model: OAuth 2.0 (IdentityServer) with Basic Authorization also supported
+  discovery:
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+    httpStatus: 200
+    anonymous: true
+    issuer: https://dispatch-login-demo.audatex.com
+    tokenEndpoint: https://dispatch-login-demo.audatex.com/connect/token
+    authorizationEndpoint: https://dispatch-login-demo.audatex.com/connect/authorize
+    introspectionEndpoint: https://dispatch-login-demo.audatex.com/connect/introspect
+    grantTypesSupported:
+      - authorization_code
+      - client_credentials
+      - refresh_token
+      - implicit
+      - password
+      - urn:ietf:params:oauth:grant-type:device_code
+      - delegation
+      - apitoken
+    scopesSupported:
+      - openid
+      - profile
+      - email
+      - address
+      - offline_access
+      - user.profile
+      - user.entity
+      - user.office
+      - user.organization
+      - cosec
+      - api1
+      - b2b.admin.api
+      - b2b.fnol.api
+      - b2b.fnol.documents
+      - b2b.fnol.transformer
+      - fnol.test
+      - gofnol.api
+      - a2e.admin.api
+      - novo.claims.manager
+      - novo.estimating
+      - estimatics.api
+      - hqclaims.api
+      - hqorg.AL
+      - hqorg.SF
+      - mobile.inspection.api
+      - review.api
+      - marketdata.web.api
+      - vinhistory.api
+      - eagle.api
+      - omadi
+      - gotime
+      - SMAppServices
+  specDeclared: |
+    All three harvested specs declare a single OAuth2 security scheme using the
+    password (resource owner) flow against
+    https://dispatch-login-demo.audatex.com/connect/token with the scope
+    b2b.fnol.api described as "Audatex Assignment API Access".
+  note: The Estimate Document Return API Integration Guide documents both Basic
+    Authorization and OAuth as supported client authentication methods, over SSL.
+transports:
+  - protocol: REST
+    scheme: https
+    baseURL: https://api-demo.audatex.com/TestAssignmentapi
+    documented: true
+  - protocol: REST
+    scheme: https
+    baseURL: https://api-demo.audatex.com/TestClaimImageapi
+    documented: true
+  - protocol: REST
+    scheme: https
+    baseURL: https://api-demo.audatex.com/TestGICapi
+    documented: true
+  - protocol: GraphQL
+    documented: false
+    note: No /graphql surface found on solera.com, na.api.solera.com or
+      api-demo.audatex.com.
+  - protocol: gRPC
+    documented: false
+    note: No published .proto found.
+  - protocol: WebSocket
+    scheme: wss
+    documented: false
+    note: No WebSocket endpoint documented.
+webhooks:
+  present: partial
+  asyncapi: false
+  note: |
+    No event catalog and no AsyncAPI document is published. The Estimate Document
+    Return integration is nonetheless callback-shaped: Audatex Integrations
+    authenticates against a CLIENT-hosted API and POSTs a HATEOAS message to a
+    client-specified endpoint when an estimate completes, after which the client
+    performs an HTTP GET to retrieve the referenced documents. That is a real
+    outbound push pattern, documented only in PDF prose, with no machine-readable
+    event schema.
+postman:
+  present: false
+  note: No Solera-owned public Postman workspace or collection was found.
+sdks:
+  present: false
+  note: No first-party SDKs, CLI, or client libraries published. github.com/solera
+    is an unrelated personal GitHub account and was not attributed to the company.
+sources:
+  - url: https://www.solera.com/company/
+    type: Website
+    note: Confirms Westlake-scale global operation, 100+ countries, and the four
+      divisions (Vehicle Claims, Vehicle Repair, Dealer Solutions, Fleet Solutions).
+      Mentions no APIs, no developer program, and no data standards.
+  - url: https://na.api.solera.com/
+    type: PartnerPortal
+    note: HTTP 200 to a login wall.
+  - url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+    type: Documentation
+    note: Publicly readable, HTTP 200, application/pdf, 430052 bytes. Source of the
+      CIECA membership statement, the BMS 5.7 reference, the production/test base
+      URLs, and the auth model.
+  - url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+    type: Documentation
+    note: Publicly readable, HTTP 200, application/pdf, 487553 bytes.
+  - url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+    type: Documentation
+    note: Publicly readable, HTTP 200, 819935 bytes.
+  - url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+    type: APIReference
+  - url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+    type: APIReference
+  - url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+    type: APIReference
+  - url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+    type: Authentication
+  - url: https://www.cieca.com/
+    type: Standards
+    note: Standards body Solera names; NOT ACORD.
+relatedProfiles:
+  - aid: audatex
+    note: Audatex is a Solera company. A separate api-evangelist/audatex profile
+      already exists and overlaps this surface. The Solera profile records the parent
+      company posture and the Solera-titled specs (the Assignment API is titled
+      "Solera Dashboard Assignment API").

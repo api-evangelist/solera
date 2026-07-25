@@ -1,0 +1,158 @@
+aid: solera
+url: https://raw.githubusercontent.com/api-evangelist/solera/refs/heads/main/apis.yml
+name: Solera
+kind: company
+description: Solera is a Westlake, Texas headquartered vehicle lifecycle management
+  software, data, and services company operating in more than 100 countries, and one
+  of the claims-technology intermediaries that sits between property and casualty insurers
+  and the repair, salvage, and fleet economy rather than underwriting risk itself. Its
+  insurance-facing business is automobile physical damage claims — first notice of loss
+  intake, photo and AI damage assessment, repair cost estimating, total loss valuation,
+  parts sourcing, and claims workflow — delivered through the Audatex and Qapter brands
+  alongside Vehicle Repair (Identifix, Autodata, Hollander), Dealer Solutions (DealerSocket,
+  cap hpi), and Fleet Solutions (Omnitracs, SmartDrive, eDriving) divisions. Its API
+  posture is characteristic of the United States insurance market seam — there is no
+  self-serve developer portal on solera.com, no signup, and no public API key. The
+  Solera Integrations portal at na.api.solera.com returns HTTP 200 to an Audatex user
+  ID and password login wall, and onboarding is a provisioned B2B integration run through
+  a Solera account representative with a kickoff meeting and UAT. What is genuinely public
+  is a set of anonymously readable Swagger UI reference pages and machine readable
+  OpenAPI 3.0.1 documents on the Audatex demo API host, plus PDF integration guides on
+  na.api.solera.com/files, covering assignment dispatch and first notice of loss, claim
+  image retrieval, and GIC integration. Authentication is OAuth 2.0 against an IdentityServer
+  discovery document at dispatch-login-demo.audatex.com with resource scopes including
+  b2b.fnol.api, gofnol.api, estimatics.api, and hqclaims.api. Solera does not reference
+  ACORD anywhere in its public integration documentation. Its published standards alignment
+  is CIECA instead — Audatex is documented as a Corporate Technology member of the Collision
+  Industry Electronic Commerce Association and licensed to use CIECA standards, with the
+  BMS 5.7 schema as the data mapping baseline for estimate return, which is the auto physical
+  damage sector's analogue to ACORD rather than ACORD itself.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Insurance
+- United States
+- Property and Casualty
+- Claims
+- Claims Technology
+- Automotive Claims
+- FNOL
+- Vehicle Damage Assessment
+- Risk Data
+- CIECA
+- Insurtech
+created: '2026-07-25'
+modified: '2026-07-25'
+specificationVersion: '0.19'
+apis:
+- aid: solera:solera-dashboard-assignment-api
+  name: Solera Dashboard Assignment API
+  description: Assignment dispatch and first notice of loss intake for automobile physical
+    damage claims. Creates a new assignment, retrieves a sample assignment request message,
+    posts assignment acknowledgements, and generates an estimate return response. OpenAPI
+    3.0.1, secured with OAuth 2.0 against the Audatex IdentityServer using the b2b.fnol.api
+    scope. Partner facing — an Audatex or Solera B2B account must be provisioned before
+    the endpoints can be called.
+  humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestAssignmentapi
+  tags:
+  - Claims
+  - FNOL
+  - Assignment
+  - Insurance
+  - Automotive
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-dashboard-assignment-openapi.json
+  - type: Documentation
+    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+- aid: solera:solera-claim-images-api
+  name: Solera ClaimImages API
+  description: Retrieval of claim images and decoded document files attached to an automobile
+    damage claim, used by insurer claim management systems consuming Audatex claim
+    documentation. Two documented operations returning an image by ClaimImage identifier
+    and a decoded file. OpenAPI 3.0.1, secured with OAuth 2.0 bearer tokens issued by
+    the Audatex IdentityServer.
+  humanURL: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestClaimImageapi
+  tags:
+  - Claims
+  - Images
+  - Documents
+  - Insurance
+  - Automotive
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-claim-images-openapi.json
+  - type: Documentation
+    url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+- aid: solera:solera-gic-integration-api
+  name: Solera EAPI GIC Integration API
+  description: Global Integration Component endpoint used to post GIC integration payloads
+    against a work assignment identifier, acknowledge M31 events, and report the deployed
+    API version. OpenAPI 3.0.1, secured with OAuth 2.0 bearer tokens issued by the Audatex
+    IdentityServer. Partner facing integration surface for claim image capture workflows.
+  humanURL: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestGICapi
+  tags:
+  - Claims
+  - Integration
+  - Insurance
+  - Automotive
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-gic-integration-openapi.json
+  - type: Documentation
+    url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+common:
+- type: Website
+  url: https://www.solera.com/
+- type: Company
+  url: https://www.solera.com/company/
+- type: Blog
+  url: https://www.solera.com/blog/
+- type: PartnerPortal
+  url: https://na.api.solera.com/
+  name: Solera Integrations Portal
+  description: Solera / Audatex integrations portal. HTTP 200 but redirects to /Login
+    and presents a User ID and Password sign-in form. No self-serve registration and no
+    public API key. Publicly readable integration guides are served under /files.
+- type: Authentication
+  url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+  name: Audatex IdentityServer OpenID Configuration
+  description: Anonymous OpenID Connect discovery document. Grant types include
+    authorization_code, client_credentials, password, refresh_token, implicit and
+    device_code. Resource scopes include b2b.fnol.api, gofnol.api, b2b.fnol.documents,
+    b2b.fnol.transformer, b2b.admin.api, estimatics.api, hqclaims.api, novo.claims.manager,
+    novo.estimating, mobile.inspection.api, marketdata.web.api and vinhistory.api.
+- type: Standards
+  url: https://www.cieca.com/
+  name: CIECA
+  description: Audatex, a Solera company, is documented in its own Estimate Document
+    Return API Integration Guide as a Corporate Technology member of the Collision Industry
+    Electronic Commerce Association and licensed to use CIECA standards in its products,
+    with BMS 5.7 as the schema baseline. No ACORD reference appears in any Solera public
+    integration documentation reviewed.
+- type: Documentation
+  url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  name: Estimate Document Return API Integration Guide
+- type: Documentation
+  url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  name: Claim Image Document Return API Integration Guide
+- type: Documentation
+  url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  name: GIC Image Capture API Guide
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

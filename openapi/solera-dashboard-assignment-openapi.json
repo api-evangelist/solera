@@ -1,0 +1,258 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Solera Dashboard Assignment API",
+    "description": "",
+    "contact": {
+      "name": "Solera",
+      "url": "http://www.audatex.us/product.asp?pageid=zContact_us"
+    },
+    "license": {
+      "name": "@SoleraNorth America, Inc. All rights reserved",
+      "url": "http://www.audatex.us/"
+    },
+    "version": "2.0"
+  },
+  "servers": [
+    {
+      "url": "/TestAssignmentapi"
+    }
+  ],
+  "paths": {
+    "/api/v2/assignments": {
+      "post": {
+        "tags": [
+          "Assignment"
+        ],
+        "summary": "Creates a new assignment",
+        "operationId": "AddAssignment",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAssignmentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAssignmentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAssignmentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAssignmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Add assignment request was received",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddAssignmentRequest"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddAssignmentRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddAssignmentRequest"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The assignment data is invalid"
+          },
+          "401": {
+            "description": "The authentication token is either missing or invalid"
+          }
+        }
+      }
+    },
+    "/api/v2/assignmentRequestMessage": {
+      "get": {
+        "tags": [
+          "Assignment"
+        ],
+        "summary": "Get Sample Assignment Message",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v2/assignmentAcks": {
+      "post": {
+        "tags": [
+          "Assignment"
+        ],
+        "summary": "Sample AssignmentAcks Response",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/v2/EstimateReturnResponse": {
+      "post": {
+        "tags": [
+          "EstimateReturn"
+        ],
+        "summary": "Generate EstimateReturn Response",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddAssignmentRequest": {
+        "type": "object",
+        "properties": {
+          "header": {
+            "$ref": "#/components/schemas/AddAssignmentRequestHeader"
+          },
+          "body": {
+            "$ref": "#/components/schemas/AddAssignmentRequestBody"
+          },
+          "responseRoute": {
+            "$ref": "#/components/schemas/ResponseRouteRequest"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddAssignmentRequestBody": {
+        "type": "object",
+        "properties": {
+          "bmsVer": {
+            "type": "string",
+            "nullable": true
+          },
+          "claimNumber": {
+            "type": "string",
+            "default": "My Default String Value",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddAssignmentRequestHeader": {
+        "type": "object",
+        "properties": {
+          "messageType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuthorizationBodyRequest": {
+        "type": "object",
+        "properties": {
+          "client_Id": {
+            "type": "string",
+            "nullable": true
+          },
+          "client_Secret": {
+            "type": "string",
+            "nullable": true
+          },
+          "audience": {
+            "type": "string",
+            "nullable": true
+          },
+          "scope": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuthorizationRequest": {
+        "type": "object",
+        "properties": {
+          "href": {
+            "type": "string",
+            "nullable": true
+          },
+          "body": {
+            "$ref": "#/components/schemas/AuthorizationBodyRequest"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseMessageRequest": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "href": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResponseRouteRequest": {
+        "type": "object",
+        "properties": {
+          "authorization": {
+            "$ref": "#/components/schemas/AuthorizationRequest"
+          },
+          "responseMessage": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResponseMessageRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "description": "Authorization using the JWT Bearer scheme",
+        "flows": {
+          "password": {
+            "tokenUrl": "https://dispatch-login-demo.audatex.com/connect/token",
+            "scopes": {
+              "b2b.fnol.api": "Audatex Assignment API Access"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "oauth2": [
+        "readAccess",
+        "writeAccess"
+      ]
+    }
+  ]
+}
