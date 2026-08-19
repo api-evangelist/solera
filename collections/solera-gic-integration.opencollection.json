@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EAPI GIC Integration API ",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "resource_owner_password_credentials",
+      "accessTokenUrl": "https://dispatch-login-demo.audatex.com/connect/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GICIntegration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Example GIC Integration Response (QA workAssignmentID - 290240018 , DEMO workAssignmentID - 332614611) ",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/TestGICapi/api/v1/GICIntegration/:workAssignmentID",
+            "params": [
+              {
+                "name": "workAssignmentID",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "imageContent",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Example GIC Integration Response (QA workAssignmentID - 290240018 , DEMO workAssignmentID - 332614611) "
+        },
+        {
+          "info": {
+            "name": "Sample M31 Event Response",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/TestGICapi/api/v1/getM31EventAcks"
+          },
+          "docs": "Sample M31 Event Response"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Version",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/TestGICapi/api/Version",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "The requested API version"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

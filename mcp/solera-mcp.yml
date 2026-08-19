@@ -2,13 +2,19 @@ generated: '2026-07-25'
 method: derived
 status: candidate
 source: openapi/*.json (26 operations across ten harvested specifications)
-search_result: |
-  No official or third-party Model Context Protocol server for Solera, Audatex, Qapter,
+search_result: 'No official or third-party Model Context Protocol server for Solera, Audatex, Qapter,
+
   Omnitracs, DealerSocket or cap hpi was found. Nothing under @modelcontextprotocol or
+
   any npm/PyPI scope, nothing in the official MCP registry, and no agent/AI-integration
+
   page on solera.com. Solera also publishes no llms.txt and no /.well-known/ai-plugin.json.
+
   The tool list below is DERIVED from the harvested OpenAPI operations as a candidate
+
   design — it is not a server Solera operates.
+
+  '
 server:
   name: solera
   transport: http
@@ -20,22 +26,26 @@ auth:
   scopes:
   - b2b.fnol.api
   - b2b.fnol.documents
-  note: |
-    A hosted MCP server for this API could not be self-serve. Credentials are provisioned
+  note: 'A hosted MCP server for this API could not be self-serve. Credentials are provisioned
+
     per client by an Audatex account representative, and each token is bound to an Audatex
+
     user id and an insurer/partner profile — so any MCP deployment is necessarily an
+
     in-tenant server operated by the integrating carrier or bodyshop platform, not a
+
     public multi-tenant one.
+
+    '
 tools:
 - name: create_assignment
-  description: Dispatch a new automobile physical damage claim assignment to Audatex,
-    carrying a Base64-encoded CIECA BMS 5.7 AssignmentAddRq and the client callback routes.
+  description: Dispatch a new automobile physical damage claim assignment to Audatex, carrying a Base64-encoded
+    CIECA BMS 5.7 AssignmentAddRq and the client callback routes.
   source_operation: openapi/solera-enterprise-assignment-prod-swagger.json#AddAssignment
   action_class: acting
   consequence: write
 - name: get_sample_assignment_message
-  description: Retrieve a sample assignment request message showing the exact expected
-    payload shape.
+  description: Retrieve a sample assignment request message showing the exact expected payload shape.
   source_operation: openapi/solera-enterprise-assignment-prod-swagger.json#AssignmentRequestMessage
   action_class: connected
   consequence: read
@@ -60,8 +70,8 @@ tools:
   action_class: connected
   consequence: read
 - name: get_claim_document
-  description: Retrieve a document attached to a claim by assignment id and document
-    locator, as referenced in an estimate-complete callback link.
+  description: Retrieve a document attached to a claim by assignment id and document locator, as referenced
+    in an estimate-complete callback link.
   source_operation: openapi/solera-getdocuments-v1-openapi.json#GET /api/v{version}/claims/{assignmentId}/document/{locator}
   action_class: connected
   consequence: read
@@ -76,26 +86,23 @@ tools:
   action_class: connected
   consequence: read
 - name: get_valuation_document
-  description: Retrieve a valuation document by type and process id (published example
-    types are xml and pdf).
+  description: Retrieve a valuation document by type and process id (published example types are xml and
+    pdf).
   source_operation: openapi/solera-getdocuments-v2-openapi.json#GET /api/v{version}/valuation/{type}/{processId}
   action_class: connected
   consequence: read
 - name: get_claim_image_document
-  description: Retrieve a claim image document by locator, as referenced in a claim-image
-    callback link.
+  description: Retrieve a claim image document by locator, as referenced in a claim-image callback link.
   source_operation: openapi/solera-getimage-v1-openapi.json#GET /api/v{version}/claims/document/{locator}
   action_class: connected
   consequence: read
 - name: get_eapi_document
-  description: Retrieve a document from the EAPI Get Document surface by assignment id and
-    locator.
+  description: Retrieve a document from the EAPI Get Document surface by assignment id and locator.
   source_operation: openapi/solera-eapi-getdocument-openapi.json#GET /api/v2/GetDocument/{assignmentId}/{locator}
   action_class: connected
   consequence: read
 - name: post_gic_integration
-  description: Post a GIC integration payload against a work assignment identifier for
-    image capture.
+  description: Post a GIC integration payload against a work assignment identifier for image capture.
   source_operation: openapi/solera-gic-integration-openapi.json#POST /api/v1/GICIntegration/{workAssignmentID}
   action_class: acting
   consequence: write
@@ -110,11 +117,16 @@ tools:
   action_class: connected
   consequence: read
 notes:
-- Tool input schemas would inherit directly from the backing operation's parameters and
-  requestBody in the referenced specification.
-- The event side of this integration is push-only to a client-hosted endpoint (see
-  asyncapi/solera-eapi-asyncapi.yml); an MCP server cannot subscribe to it, so any agent
-  workflow must be driven from documents the client's own callback receiver has already
-  captured.
-- See agentic-access/solera-agentic-access.yml for recommended x-agentic-access execution
-  contracts per operation.
+- Tool input schemas would inherit directly from the backing operation's parameters and requestBody in
+  the referenced specification.
+- The event side of this integration is push-only to a client-hosted endpoint (see asyncapi/solera-eapi-asyncapi.yml);
+  an MCP server cannot subscribe to it, so any agent workflow must be driven from documents the client's
+  own callback receiver has already captured.
+- See agentic-access/solera-agentic-access.yml for recommended x-agentic-access execution contracts per
+  operation.
+deployment:
+  mode: none
+  verified: derived
+  tools: 15
+  checked: '2026-08-12'
+  source: catalog MCP census

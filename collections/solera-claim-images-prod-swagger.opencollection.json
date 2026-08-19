@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ClaimImages API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GetImage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "( Example ClaimImage - C293B120-A763-404E-AC9D-2A687128D3DC)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v:version/image/:ClaimImage",
+            "params": [
+              {
+                "name": "ClaimImage",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "The requested API version"
+              }
+            ]
+          },
+          "docs": "( Example ClaimImage - C293B120-A763-404E-AC9D-2A687128D3DC)"
+        },
+        {
+          "info": {
+            "name": "Gets a decoded file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v:version/image/:type",
+            "params": [
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "The requested API version"
+              }
+            ]
+          },
+          "docs": "Gets a decoded file"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,172 @@
+{
+  "item": [
+    {
+      "id": "abc5ad00-e616-4a35-b9a4-19b4cae365b0",
+      "name": "GetValuationResponse",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "585a4d66-3376-463b-abfa-7b5b0705a3eb",
+          "name": "/api/v{{version}}/valuation/:type/:processId",
+          "request": {
+            "name": "/api/v{{version}}/valuation/:type/:processId",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v{{version}}",
+                "valuation",
+                ":type",
+                ":processId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "type",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "processId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "83a48867-2eae-42b0-88e8-3c603922349c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v{{version}}",
+                    "valuation",
+                    ":type",
+                    ":processId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "type",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "processId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"header\": {\n    \"cid\": \"string\",\n    \"statusCode\": \"string\"\n  },\n  \"body\": {\n    \"createdForProfileId\": \"string\",\n    \"imageId\": \"string\",\n    \"attachmentId\": \"string\",\n    \"requestNbr\": \"string\",\n    \"extension\": \"string\",\n    \"payload\": \"string\",\n    \"dataType\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/GetDocuments",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) The requested API version",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "version"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "b2b.fnol.documents"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://dispatch-login-demo.audatex.com/connect/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "password_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "857b880a-32cd-4b2e-a94f-4e059c011ec5",
+    "name": "Audatex GetDocuments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Retrieve documents from the Audatex system.\n\nContact Support:\n Name: Audatex",
+      "type": "text/plain"
+    }
+  }
+}

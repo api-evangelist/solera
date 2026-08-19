@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EAPI Get Document API"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "resource_owner_password_credentials",
+      "accessTokenUrl": "https://dispatch-login-demo.audatex.com/connect/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GetDocument",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "( Example assignmentId - 332067651 , locator - 8a4a7758-f035-49b7-aa76-69280128123b  )",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/TestGetDocumentapi/api/v2/GetDocument/:assignmentId/:locator",
+            "params": [
+              {
+                "name": "assignmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locator",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "( Example assignmentId - 332067651 , locator - 8a4a7758-f035-49b7-aa76-69280128123b  )"
+        },
+        {
+          "info": {
+            "name": "Example of decoded attached image/pdf files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/TestGetDocumentapi/api/v2/:type",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Example of decoded attached image/pdf files"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ValuationReturn",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "( Example processId - 67302420-1 , types - xml pdf)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/TestGetDocumentapi/api/v2/valuation/:type/:processId",
+            "params": [
+              {
+                "name": "processId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "( Example processId - 67302420-1 , types - xml pdf)"
+        },
+        {
+          "info": {
+            "name": "Gets a decoded file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/TestGetDocumentapi/api/v2/valuation/:type",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets a decoded file"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

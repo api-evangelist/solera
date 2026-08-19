@@ -1,0 +1,465 @@
+{
+  "item": [
+    {
+      "id": "52285567-0711-4899-b94f-a38a5904fe58",
+      "name": "Assignment",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bfd85291-f98a-4395-acb2-b05dbccee644",
+          "name": "Creates a new assignment",
+          "request": {
+            "name": "Creates a new assignment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "assignments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"header\": {\n    \"messageType\": \"<string>\"\n  },\n  \"body\": {\n    \"bmsVer\": \"<string>\",\n    \"claimNumber\": \"My Default String Value\",\n    \"content\": \"<string>\"\n  },\n  \"responseRoute\": {\n    \"authorization\": {\n      \"href\": \"<string>\",\n      \"body\": {\n        \"client_Id\": \"<string>\",\n        \"client_Secret\": \"<string>\",\n        \"audience\": \"<string>\",\n        \"scope\": \"<string>\"\n      }\n    },\n    \"responseMessage\": [\n      {\n        \"type\": \"<string>\",\n        \"href\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"href\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a5626ed9-2296-4591-9b58-b5dd040e35a0",
+              "name": "Add assignment request was received",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "assignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"header\": {\n    \"messageType\": \"<string>\"\n  },\n  \"body\": {\n    \"bmsVer\": \"<string>\",\n    \"claimNumber\": \"My Default String Value\",\n    \"content\": \"<string>\"\n  },\n  \"responseRoute\": {\n    \"authorization\": {\n      \"href\": \"<string>\",\n      \"body\": {\n        \"client_Id\": \"<string>\",\n        \"client_Secret\": \"<string>\",\n        \"audience\": \"<string>\",\n        \"scope\": \"<string>\"\n      }\n    },\n    \"responseMessage\": [\n      {\n        \"type\": \"<string>\",\n        \"href\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"href\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"header\": {\n    \"messageType\": \"<string>\"\n  },\n  \"body\": {\n    \"bmsVer\": \"<string>\",\n    \"claimNumber\": \"My Default String Value\",\n    \"content\": \"<string>\"\n  },\n  \"responseRoute\": {\n    \"authorization\": {\n      \"href\": \"<string>\",\n      \"body\": {\n        \"client_Id\": \"<string>\",\n        \"client_Secret\": \"<string>\",\n        \"audience\": \"<string>\",\n        \"scope\": \"<string>\"\n      }\n    },\n    \"responseMessage\": [\n      {\n        \"type\": \"<string>\",\n        \"href\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"href\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42335504-e329-48a4-a27d-4144692fceed",
+              "name": "The assignment data is invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "assignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"header\": {\n    \"messageType\": \"<string>\"\n  },\n  \"body\": {\n    \"bmsVer\": \"<string>\",\n    \"claimNumber\": \"My Default String Value\",\n    \"content\": \"<string>\"\n  },\n  \"responseRoute\": {\n    \"authorization\": {\n      \"href\": \"<string>\",\n      \"body\": {\n        \"client_Id\": \"<string>\",\n        \"client_Secret\": \"<string>\",\n        \"audience\": \"<string>\",\n        \"scope\": \"<string>\"\n      }\n    },\n    \"responseMessage\": [\n      {\n        \"type\": \"<string>\",\n        \"href\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"href\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "faff9bbf-1c38-4ed1-a54f-5475f551bf51",
+              "name": "The authentication token is either missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "assignments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"header\": {\n    \"messageType\": \"<string>\"\n  },\n  \"body\": {\n    \"bmsVer\": \"<string>\",\n    \"claimNumber\": \"My Default String Value\",\n    \"content\": \"<string>\"\n  },\n  \"responseRoute\": {\n    \"authorization\": {\n      \"href\": \"<string>\",\n      \"body\": {\n        \"client_Id\": \"<string>\",\n        \"client_Secret\": \"<string>\",\n        \"audience\": \"<string>\",\n        \"scope\": \"<string>\"\n      }\n    },\n    \"responseMessage\": [\n      {\n        \"type\": \"<string>\",\n        \"href\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"href\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f0325f0-cecc-4018-9a97-1147f62df60e",
+          "name": "Get Sample Assignment Message",
+          "request": {
+            "name": "Get Sample Assignment Message",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "assignmentRequestMessage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef9be7d0-e3c4-4d17-9bfc-bd4672dcfec2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "assignmentRequestMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f4aee49-8cff-4ba0-9331-74d13993f5da",
+          "name": "Sample AssignmentAcks Response",
+          "request": {
+            "name": "Sample AssignmentAcks Response",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "assignmentAcks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81a5ce3a-a3b6-4dee-a676-48d1a57a7416",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "assignmentAcks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "a078a4cc-31df-4bff-9bd4-6efab00ebe85",
+      "name": "EstimateReturn",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f6e669ce-0fcd-4391-9432-1d61a1907f39",
+          "name": "Generate EstimateReturn Response",
+          "request": {
+            "name": "Generate EstimateReturn Response",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "EstimateReturnResponse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4cbf0c95-e7f4-4c24-bb0e-236c62348127",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "EstimateReturnResponse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/TestAssignmentapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "b2b.fnol.api"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://dispatch-login-demo.audatex.com/connect/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "password_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "de9eb5f3-8786-4416-9a27-90885a5c4965",
+    "name": "Solera Dashboard Assignment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Solera",
+      "type": "text/plain"
+    }
+  }
+}

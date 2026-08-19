@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audatex GetDocuments API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "resource_owner_password_credentials",
+      "accessTokenUrl": "https://dispatch-login-demo.audatex.com/connect/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GetValuationResponse",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v{version}/valuation/{type}/{processId}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/GetDocuments/api/v:version/valuation/:type/:processId",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "processId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The requested API version"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

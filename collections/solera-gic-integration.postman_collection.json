@@ -1,0 +1,306 @@
+{
+  "item": [
+    {
+      "id": "8af7e558-1c4b-4849-9b31-63707b811a3e",
+      "name": "GICIntegration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b7ab3413-931c-42ae-a595-69734a77ae39",
+          "name": "Example GIC Integration Response (QA workAssignmentID - 290240018 , DEMO workAssignmentID - 332614611) ",
+          "request": {
+            "name": "Example GIC Integration Response (QA workAssignmentID - 290240018 , DEMO workAssignmentID - 332614611) ",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "GICIntegration",
+                ":workAssignmentID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "imageContent",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workAssignmentID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea33aa30-c400-449d-8a3b-d79c34f48480",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "GICIntegration",
+                    ":workAssignmentID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "imageContent",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workAssignmentID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ce81734-55f4-47d5-af48-a2f147f7a8cb",
+          "name": "Sample M31 Event Response",
+          "request": {
+            "name": "Sample M31 Event Response",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "getM31EventAcks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f86a3e9-db82-4e0c-ad54-da81137751fb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "getM31EventAcks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "05f1bafb-d625-4591-b793-8108381df89c",
+      "name": "Version",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c17a4077-430e-4aa4-bc7d-5955165dc2b4",
+          "name": "/api/Version",
+          "request": {
+            "name": "/api/Version",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "Version"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "api-version",
+                  "value": "<string>",
+                  "description": "(Required) The requested API version"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1b39924-ab1b-4d92-8583-e4d3027ca880",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "Version"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "api-version",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/TestGICapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "b2b.fnol.api"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://dispatch-login-demo.audatex.com/connect/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "password_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c2ea45ce-91fc-4040-b0c3-b15344c54124",
+    "name": "EAPI GIC Integration API ",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Audatex\n Email: https://www.audatex.us/product.asp?pageid=zContact_us",
+      "type": "text/plain"
+    }
+  }
+}

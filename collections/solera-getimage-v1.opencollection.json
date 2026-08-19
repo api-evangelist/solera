@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audatex Assignment Get Document API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GetClaimImageResponse",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v{version}/claims/document/{locator}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v:version/claims/document/:locator",
+            "headers": [
+              {
+                "name": "api-version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "locator",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

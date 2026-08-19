@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Audatex GetDocuments API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "resource_owner_password_credentials",
+      "accessTokenUrl": "https://dispatch-login-demo.audatex.com/connect/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GetDocuments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v{version}/GetDocument",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/GetDocuments/api/v:version/GetDocument",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The requested API version"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/v{version}/claims/{assignmentId}/document/{locator}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/GetDocuments/api/v:version/claims/:assignmentId/document/:locator",
+            "params": [
+              {
+                "name": "assignmentId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "locator",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The requested API version"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "GetValuation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/v{version}/GetValuation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/GetDocuments/api/v:version/GetValuation",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The requested API version"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Version",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/GetDocuments/api/Version",
+            "params": [
+              {
+                "name": "api-version",
+                "value": "",
+                "type": "query",
+                "description": "The requested API version"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

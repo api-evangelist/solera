@@ -1,0 +1,140 @@
+{
+  "item": [
+    {
+      "id": "174c0fa2-d487-4cac-b957-dcab6ceeac5f",
+      "name": "Version",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d933bd2b-7441-4aa7-ac52-b1c7ef2b6107",
+          "name": "/api/v{{version}}",
+          "request": {
+            "name": "/api/v{{version}}",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v{{version}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "The requested API version",
+                "key": "api-version",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "371e47bc-0136-4bc7-b947-9bec5a03132e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v{{version}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "The requested API version",
+                    "key": "api-version",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "version"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d3e0ce7f-6906-4e73-b488-bd8821e0a176",
+    "name": "Audatex Assignment Get Document API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Cancel an assignment to the Audatex system. Assignment messages are transmitted in the CIECA BMS format.\n\nContact Support:\n Name: Audatex\n Email: http://www.audatex.us/product.asp?pageid=zContact_us",
+      "type": "text/plain"
+    }
+  }
+}

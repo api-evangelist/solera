@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ClaimImages API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "resource_owner_password_credentials",
+      "accessTokenUrl": "https://dispatch-login-demo.audatex.com/connect/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GetImage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "( Example ClaimImage - C293B120-A763-404E-AC9D-2A687128D3DC)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/TestClaimImageapi/api/v2/image/:ClaimImage",
+            "params": [
+              {
+                "name": "ClaimImage",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "( Example ClaimImage - C293B120-A763-404E-AC9D-2A687128D3DC)"
+        },
+        {
+          "info": {
+            "name": "Gets a decoded file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/TestClaimImageapi/api/v2/decodedFile"
+          },
+          "docs": "Gets a decoded file"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

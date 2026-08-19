@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Solera Dashboard Assignment API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "resource_owner_password_credentials",
+      "accessTokenUrl": "https://dispatch-login-demo.audatex.com/connect/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assignment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a new assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/TestAssignmentapi/api/v2/assignments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new assignment"
+        },
+        {
+          "info": {
+            "name": "Get Sample Assignment Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/TestAssignmentapi/api/v2/assignmentRequestMessage"
+          },
+          "docs": "Get Sample Assignment Message"
+        },
+        {
+          "info": {
+            "name": "Sample AssignmentAcks Response",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/TestAssignmentapi/api/v2/assignmentAcks"
+          },
+          "docs": "Sample AssignmentAcks Response"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "EstimateReturn",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate EstimateReturn Response",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/TestAssignmentapi/api/v2/EstimateReturnResponse"
+          },
+          "docs": "Generate EstimateReturn Response"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
