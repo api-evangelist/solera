@@ -39,7 +39,7 @@ tags:
 - Insurtech
 created: '2026-07-25'
 modified: '2026-07-25'
-specificationVersion: '0.21'
+specificationVersion: '0.23'
 apis:
 - aid: solera:solera-dashboard-assignment-api
   name: Solera Dashboard Assignment API
