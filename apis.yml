@@ -89,6 +89,12 @@ apis:
   baseURL: https://api-demo.audatex.com/TestClaimImageapi
   tags:
   - Claims
+  - Image
+  - Documents
+  - Insurance
+  - Automotive
+  tags_raw:
+  - Claims
   - Images
   - Documents
   - Insurance
@@ -190,6 +196,12 @@ apis:
   humanURL: https://api-prod.audatex.com/GetImage/docs/index.html
   baseURL: https://api-prod.audatex.com/GetImage
   tags:
+  - Claims
+  - Image
+  - Documents
+  - Insurance
+  - Automotive
+  tags_raw:
   - Claims
   - Images
   - Documents
