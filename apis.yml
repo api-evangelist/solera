@@ -41,220 +41,489 @@ created: '2026-07-25'
 modified: '2026-07-25'
 specificationVersion: '0.23'
 apis:
-- aid: solera:solera-dashboard-assignment-api
-  name: Solera Dashboard Assignment API
-  description: Assignment dispatch and first notice of loss intake for automobile physical damage
-    claims. Creates a new assignment, retrieves a sample assignment request message, posts assignment
-    acknowledgements, and generates an estimate return response. OpenAPI 3.0.1, secured with OAuth
-    2.0 against the Audatex IdentityServer using the b2b.fnol.api scope. Partner facing — an Audatex
-    or Solera B2B account must be provisioned before the endpoints can be called.
+- aid: solera:solera-assignment-api
+  name: Solera Assignment API
+  description: The Assignment API from Solera — 3 operation(s) for assignment.
   humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
   baseURL: https://api-demo.audatex.com/TestAssignmentapi
   tags:
-  - Claims
-  - FNOL
   - Assignment
-  - Insurance
-  - Automotive
   properties:
   - type: OpenAPI
-    url: openapi/solera-dashboard-assignment-openapi.json
+    url: openapi/solera-assignment-api-openapi.yml
   - type: Documentation
     url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
   - type: APIReference
     url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
   - type: Authentication
     url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
-  - type: OpenAPI
-    url: openapi/solera-enterprise-assignment-prod-swagger.json
-    name: Solera Enterprise API (production, Swagger 2.0)
-    description: 'Production variant served anonymously at https://api-prod.audatex.com/TestAssignmentapi/docs/swaggerjson/v2.
-      Swagger 2.0 rather than OpenAPI 3.0.1, and richer than the demo document: it carries an operationId
-      on every operation (AddAssignment, AssignmentRequestMessage, AssignmentAcks, EstimateReturnResponse)
-      and points its token URL at the production IdentityServer.'
   - type: APIReference
     url: https://api-prod.audatex.com/TestAssignmentapi/docs/index.html
-    name: Production Swagger UI
-  - type: Overlay
-    url: overlays/solera-dashboard-assignment-overlay.yaml
-  - type: Overlay
-    url: overlays/solera-enterprise-assignment-prod-swagger-overlay.yaml
-- aid: solera:solera-claim-images-api
-  name: Solera ClaimImages API
-  description: Retrieval of claim images and decoded document files attached to an automobile damage
-    claim, used by insurer claim management systems consuming Audatex claim documentation. Two documented
-    operations returning an image by ClaimImage identifier and a decoded file. OpenAPI 3.0.1, secured
-    with OAuth 2.0 bearer tokens issued by the Audatex IdentityServer.
-  humanURL: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
-  baseURL: https://api-demo.audatex.com/TestClaimImageapi
-  tags:
-  - Claims
-  - Image
-  - Documents
-  - Insurance
-  - Automotive
-  tags_raw:
-  - Claims
-  - Images
-  - Documents
-  - Insurance
-  - Automotive
-  properties:
-  - type: OpenAPI
-    url: openapi/solera-claim-images-openapi.json
   - type: Documentation
     url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
   - type: APIReference
     url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
-  - type: Authentication
-    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
-  - type: OpenAPI
-    url: openapi/solera-claim-images-prod-swagger.json
-    name: ClaimImages API (production, Swagger 2.0)
-    description: Production variant served anonymously at https://api-prod.audatex.com/TestClaimImageapi/docs/swaggerjson/v2.
-      Carries operationIds (valuationReturn, decodeImage), a templated /api/v{version}/ path, a required
-      api-version query parameter and a FileResult response schema the demo document lacks.
   - type: APIReference
     url: https://api-prod.audatex.com/TestClaimImageapi/docs/index.html
-    name: Production Swagger UI
-  - type: Overlay
-    url: overlays/solera-claim-images-overlay.yaml
-  - type: Overlay
-    url: overlays/solera-claim-images-prod-swagger-overlay.yaml
-- aid: solera:solera-gic-integration-api
-  name: Solera EAPI GIC Integration API
-  description: Global Integration Component endpoint used to post GIC integration payloads against
-    a work assignment identifier, acknowledge M31 events, and report the deployed API version. OpenAPI
-    3.0.1, secured with OAuth 2.0 bearer tokens issued by the Audatex IdentityServer. Partner facing
-    integration surface for claim image capture workflows.
-  humanURL: https://api-demo.audatex.com/TestGICapi/docs/index.html
-  baseURL: https://api-demo.audatex.com/TestGICapi
-  tags:
-  - Claims
-  - Integration
-  - Insurance
-  - Automotive
-  properties:
-  - type: OpenAPI
-    url: openapi/solera-gic-integration-openapi.json
   - type: Documentation
     url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
   - type: APIReference
     url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestGICapi/docs/index.html
+  - type: AsyncAPI
+    url: asyncapi/solera-eapi-asyncapi.yml
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetDocuments/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetImage/docs/index.html
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGetDocumentapi/docs/index.html
+  - type: Sandbox
+    url: sandbox/solera-sandbox.yml
+- aid: solera:solera-estimatereturn-api
+  name: Solera Estimate Return API
+  description: The EstimateReturn API from Solera — 1 operation(s) for estimatereturn.
+  humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestAssignmentapi
+  tags:
+  - EstimateReturn
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-estimatereturn-api-openapi.yml
+  - type: Documentation
+    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
   - type: Authentication
     url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
   - type: APIReference
-    url: https://api-prod.audatex.com/TestGICapi/docs/index.html
-    name: Production Swagger UI
-  - type: Overlay
-    url: overlays/solera-gic-integration-overlay.yaml
-  - type: AsyncAPI
-    url: asyncapi/solera-eapi-asyncapi.yml
-    name: M31 image-upload-completed event
-- aid: solera:solera-getdocuments-api
-  name: Audatex GetDocuments API
-  description: 'Document and valuation retrieval for automobile physical damage claims. This is the
-    surface the estimate-complete callback links point at: given an assignment identifier and a document
-    locator, it returns the estimate XML, print image or attachment Base64-encoded inside a header/body
-    envelope, with body.dataType describing how to decode it. Version 1.0 serves document-by-id,
-    claim-document-by-locator, valuation-by-id and a version endpoint; version 2.0 narrows to a valuation
-    document by type and process id. OpenAPI 3.0.1, secured with OAuth 2.0 using the b2b.fnol.documents
-    scope. Both versions are served anonymously from the Swagger UI on the demo and production hosts.'
-  humanURL: https://api-prod.audatex.com/GetDocuments/docs/index.html
-  baseURL: https://api-prod.audatex.com/GetDocuments
-  tags:
-  - Claims
-  - Documents
-  - Valuation
-  - Insurance
-  - Automotive
-  properties:
-  - type: OpenAPI
-    url: openapi/solera-getdocuments-v1-openapi.json
-    name: Audatex GetDocuments API 1.0
-  - type: OpenAPI
-    url: openapi/solera-getdocuments-v2-openapi.json
-    name: Audatex GetDocuments API 2.0
-  - type: APIReference
-    url: https://api-prod.audatex.com/GetDocuments/docs/index.html
-  - type: Documentation
-    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
-  - type: Authentication
-    url: https://dispatch-login.audatex.com/.well-known/openid-configuration
-  - type: Overlay
-    url: overlays/solera-getdocuments-v1-overlay.yaml
-  - type: Overlay
-    url: overlays/solera-getdocuments-v2-overlay.yaml
-- aid: solera:solera-getimage-api
-  name: Audatex Assignment Get Document API (GetImage)
-  description: Claim image document retrieval. The claim-image callback publishes a HATEOAS link
-    into this surface, and the client GETs the referenced document by locator. Version 1.0 exposes
-    the claim-document-by-locator operation; version 2.0 exposes a version endpoint. OpenAPI 3.0.1,
-    and the only Solera surface that declares its bearer credential as an apiKey-style Authorization
-    header scheme rather than an oauth2 scheme, with the API version carried in an api-version request
-    header. Served anonymously from the Swagger UI on both the demo and production hosts.
-  humanURL: https://api-prod.audatex.com/GetImage/docs/index.html
-  baseURL: https://api-prod.audatex.com/GetImage
-  tags:
-  - Claims
-  - Image
-  - Documents
-  - Insurance
-  - Automotive
-  tags_raw:
-  - Claims
-  - Images
-  - Documents
-  - Insurance
-  - Automotive
-  properties:
-  - type: OpenAPI
-    url: openapi/solera-getimage-v1-openapi.json
-    name: Audatex Assignment Get Document API 1.0
-  - type: OpenAPI
-    url: openapi/solera-getimage-v2-openapi.json
-    name: Audatex Assignment Get Document API 2.0
-  - type: APIReference
-    url: https://api-prod.audatex.com/GetImage/docs/index.html
+    url: https://api-prod.audatex.com/TestAssignmentapi/docs/index.html
   - type: Documentation
     url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestClaimImageapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestGICapi/docs/index.html
+  - type: AsyncAPI
+    url: asyncapi/solera-eapi-asyncapi.yml
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetDocuments/docs/index.html
   - type: Authentication
     url: https://dispatch-login.audatex.com/.well-known/openid-configuration
-  - type: Overlay
-    url: overlays/solera-getimage-v1-overlay.yaml
-  - type: Overlay
-    url: overlays/solera-getimage-v2-overlay.yaml
-- aid: solera:solera-eapi-getdocument-api
-  name: Solera EAPI Get Document API
-  description: 'Enterprise API document and valuation retrieval, and the best-documented of the Solera
-    retrieval surfaces: every operation carries a worked example in its summary, including a real
-    assignment identifier, document locator and valuation process id, and every operation declares
-    400 and 401 failure cases. Four operations retrieve a document by assignment id and locator,
-    a decoded attached image or PDF by type, a valuation document by type and process id, and a decoded
-    valuation file. OpenAPI 3.0.1, secured with OAuth 2.0 against the Audatex IdentityServer.'
-  humanURL: https://api-demo.audatex.com/TestGetDocumentapi/docs/index.html
-  baseURL: https://api-demo.audatex.com/TestGetDocumentapi
-  tags:
-  - Claims
-  - Documents
-  - Valuation
-  - Insurance
-  - Automotive
-  properties:
-  - type: OpenAPI
-    url: openapi/solera-eapi-getdocument-openapi.json
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetImage/docs/index.html
   - type: APIReference
     url: https://api-demo.audatex.com/TestGetDocumentapi/docs/index.html
-  - type: Documentation
-    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
-  - type: Authentication
-    url: https://dispatch-login.audatex.com/.well-known/openid-configuration
-  - type: Overlay
-    url: overlays/solera-eapi-getdocument-overlay.yaml
   - type: Sandbox
     url: sandbox/solera-sandbox.yml
-    name: Published example identifiers
+- aid: solera:solera-getclaimimageresponse-api
+  name: Solera Get Claim Image Response API
+  description: The GetClaimImageResponse API from Solera — 1 operation(s) for getclaimimageresponse.
+  humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestAssignmentapi
+  tags:
+  - GetClaimImageResponse
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-getclaimimageresponse-api-openapi.yml
+  - type: Documentation
+    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestClaimImageapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestGICapi/docs/index.html
+  - type: AsyncAPI
+    url: asyncapi/solera-eapi-asyncapi.yml
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetDocuments/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetImage/docs/index.html
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGetDocumentapi/docs/index.html
+  - type: Sandbox
+    url: sandbox/solera-sandbox.yml
+- aid: solera:solera-getdocument-api
+  name: Solera Get Document API
+  description: The GetDocument API from Solera — 2 operation(s) for getdocument.
+  humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestAssignmentapi
+  tags:
+  - GetDocument
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-getdocument-api-openapi.yml
+  - type: Documentation
+    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestClaimImageapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestGICapi/docs/index.html
+  - type: AsyncAPI
+    url: asyncapi/solera-eapi-asyncapi.yml
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetDocuments/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetImage/docs/index.html
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGetDocumentapi/docs/index.html
+  - type: Sandbox
+    url: sandbox/solera-sandbox.yml
+- aid: solera:solera-getdocuments-api
+  name: Solera Get Documents API
+  description: The GetDocuments API from Solera — 2 operation(s) for getdocuments.
+  humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestAssignmentapi
+  tags:
+  - GetDocuments
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-getdocuments-api-openapi.yml
+  - type: Documentation
+    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestClaimImageapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestGICapi/docs/index.html
+  - type: AsyncAPI
+    url: asyncapi/solera-eapi-asyncapi.yml
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetDocuments/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetImage/docs/index.html
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGetDocumentapi/docs/index.html
+  - type: Sandbox
+    url: sandbox/solera-sandbox.yml
+- aid: solera:solera-getimage-api
+  name: Solera Get Image API
+  description: The GetImage API from Solera — 4 operation(s) for getimage.
+  humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestAssignmentapi
+  tags:
+  - GetImage
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-getimage-api-openapi.yml
+  - type: Documentation
+    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestClaimImageapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestGICapi/docs/index.html
+  - type: AsyncAPI
+    url: asyncapi/solera-eapi-asyncapi.yml
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetDocuments/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetImage/docs/index.html
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGetDocumentapi/docs/index.html
+  - type: Sandbox
+    url: sandbox/solera-sandbox.yml
+- aid: solera:solera-getvaluation-api
+  name: Solera Get Valuation API
+  description: The GetValuation API from Solera — 1 operation(s) for getvaluation.
+  humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestAssignmentapi
+  tags:
+  - GetValuation
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-getvaluation-api-openapi.yml
+  - type: Documentation
+    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestClaimImageapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestGICapi/docs/index.html
+  - type: AsyncAPI
+    url: asyncapi/solera-eapi-asyncapi.yml
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetDocuments/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetImage/docs/index.html
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGetDocumentapi/docs/index.html
+  - type: Sandbox
+    url: sandbox/solera-sandbox.yml
+- aid: solera:solera-getvaluationresponse-api
+  name: Solera Get Valuation Response API
+  description: The GetValuationResponse API from Solera — 1 operation(s) for getvaluationresponse.
+  humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestAssignmentapi
+  tags:
+  - GetValuationResponse
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-getvaluationresponse-api-openapi.yml
+  - type: Documentation
+    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestClaimImageapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestGICapi/docs/index.html
+  - type: AsyncAPI
+    url: asyncapi/solera-eapi-asyncapi.yml
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetDocuments/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetImage/docs/index.html
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGetDocumentapi/docs/index.html
+  - type: Sandbox
+    url: sandbox/solera-sandbox.yml
+- aid: solera:solera-gicintegration-api
+  name: Solera GIC Integration API
+  description: The GICIntegration API from Solera — 2 operation(s) for gicintegration.
+  humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestAssignmentapi
+  tags:
+  - GICIntegration
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-gicintegration-api-openapi.yml
+  - type: Documentation
+    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestClaimImageapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestGICapi/docs/index.html
+  - type: AsyncAPI
+    url: asyncapi/solera-eapi-asyncapi.yml
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetDocuments/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetImage/docs/index.html
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGetDocumentapi/docs/index.html
+  - type: Sandbox
+    url: sandbox/solera-sandbox.yml
+- aid: solera:solera-valuationreturn-api
+  name: Solera Valuation Return API
+  description: The ValuationReturn API from Solera — 2 operation(s) for valuationreturn.
+  humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestAssignmentapi
+  tags:
+  - ValuationReturn
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-valuationreturn-api-openapi.yml
+  - type: Documentation
+    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestClaimImageapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestGICapi/docs/index.html
+  - type: AsyncAPI
+    url: asyncapi/solera-eapi-asyncapi.yml
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetDocuments/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetImage/docs/index.html
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGetDocumentapi/docs/index.html
+  - type: Sandbox
+    url: sandbox/solera-sandbox.yml
+- aid: solera:solera-version-api
+  name: Solera Version API
+  description: The Version API from Solera — 2 operation(s) for version.
+  humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  baseURL: https://api-demo.audatex.com/TestAssignmentapi
+  tags:
+  - Version
+  properties:
+  - type: OpenAPI
+    url: openapi/solera-version-api-openapi.yml
+  - type: Documentation
+    url: https://na.api.solera.com/files/Estimate%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestClaimImageapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestClaimImageapi/docs/index.html
+  - type: Documentation
+    url: https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: APIReference
+    url: https://api-prod.audatex.com/TestGICapi/docs/index.html
+  - type: AsyncAPI
+    url: asyncapi/solera-eapi-asyncapi.yml
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetDocuments/docs/index.html
+  - type: Authentication
+    url: https://dispatch-login.audatex.com/.well-known/openid-configuration
+  - type: APIReference
+    url: https://api-prod.audatex.com/GetImage/docs/index.html
+  - type: APIReference
+    url: https://api-demo.audatex.com/TestGetDocumentapi/docs/index.html
+  - type: Sandbox
+    url: sandbox/solera-sandbox.yml
 common:
+- type: Overlay
+  url: overlays/solera-dashboard-assignment-overlay.yaml
+- type: Overlay
+  url: overlays/solera-enterprise-assignment-prod-swagger-overlay.yaml
+- type: Overlay
+  url: overlays/solera-claim-images-overlay.yaml
+- type: Overlay
+  url: overlays/solera-claim-images-prod-swagger-overlay.yaml
+- type: Overlay
+  url: overlays/solera-gic-integration-overlay.yaml
+- type: Overlay
+  url: overlays/solera-getdocuments-v1-overlay.yaml
+- type: Overlay
+  url: overlays/solera-getdocuments-v2-overlay.yaml
+- type: Overlay
+  url: overlays/solera-getimage-v1-overlay.yaml
+- type: Overlay
+  url: overlays/solera-getimage-v2-overlay.yaml
+- type: Overlay
+  url: overlays/solera-eapi-getdocument-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/solera-agentic-access.yml
 - type: DomainSecurity
