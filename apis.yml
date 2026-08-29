@@ -1,5 +1,8 @@
 aid: solera
 url: https://raw.githubusercontent.com/api-evangelist/solera/refs/heads/main/apis.yml
+x-api-posture: no-product-api
+x-api-posture-basis: observed
+x-api-posture-note: "Its API posture is characteristic of the United States insurance market seam — there is no self-serve developer portal on solera.com, no signup, and no public API key."
 name: Solera
 kind: company
 description: Solera is a Westlake, Texas headquartered vehicle lifecycle management software, data,
@@ -516,6 +519,9 @@ apis:
   - type: Sandbox
     url: sandbox/solera-sandbox.yml
 common:
+- type: CapabilityMap
+  url: capabilities/solera-capability-edges.yml
+  name: Solera Business Capability Map
 - type: Overlay
   url: overlays/solera-dashboard-assignment-overlay.yaml
 - type: Overlay
