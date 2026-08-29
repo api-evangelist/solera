@@ -24,6 +24,18 @@ description: Solera is a Westlake, Texas headquartered vehicle lifecycle managem
   Industry Electronic Commerce Association and licensed to use CIECA standards, with the BMS 5.7
   schema as the data mapping baseline for estimate return, which is the auto physical damage sector's
   analogue to ACORD rather than ACORD itself.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Insurance
