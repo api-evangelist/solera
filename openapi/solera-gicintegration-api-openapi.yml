@@ -1,0 +1,56 @@
+openapi: 3.2.0
+info:
+  title: EAPI GIC Integration API
+  description: ''
+  contact:
+    name: Audatex
+    email: https://www.audatex.us/product.asp?pageid=zContact_us
+  license:
+    name: '@Audatex North America, Inc. All rights reserved'
+    url: https://www.audatex.us/
+  version: '1.0'
+servers:
+- url: /TestGICapi
+security:
+- oauth2:
+  - readAccess
+  - writeAccess
+tags:
+- name: GICIntegration
+paths:
+  /api/v1/GICIntegration/{workAssignmentID}:
+    post:
+      tags:
+      - GICIntegration
+      summary: 'Example GIC Integration Response (QA workAssignmentID - 290240018 , DEMO workAssignmentID - 332614611) '
+      parameters:
+      - name: workAssignmentID
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: imageContent
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+  /api/v1/getM31EventAcks:
+    post:
+      tags:
+      - GICIntegration
+      summary: Sample M31 Event Response
+      responses:
+        '200':
+          description: Success
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Authorization using the JWT Bearer scheme
+      flows:
+        password:
+          tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+          scopes:
+            b2b.fnol.api: Audatex Assignment API Access

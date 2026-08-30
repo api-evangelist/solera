@@ -1,0 +1,98 @@
+openapi: 3.2.0
+info:
+  title: Audatex GetDocuments Get Valuation API
+  description: Retrieve documents from the Audatex system.
+  contact:
+    name: Audatex
+    url: http://www.audatex.us/product.asp?pageid=zContact_us
+  license:
+    name: '@Audatex North America, Inc. All rights reserved'
+    url: http://www.audatex.us/
+  version: '1.0'
+servers:
+- url: /GetDocuments
+security:
+- oauth2:
+  - readAccess
+  - writeAccess
+tags:
+- name: GetValuation
+paths:
+  /api/v{version}/GetValuation:
+    get:
+      tags:
+      - GetValuation
+      parameters:
+      - name: id
+        in: query
+        schema:
+          type: string
+      - name: version
+        in: path
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValuationResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValuationResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValuationResponse'
+components:
+  schemas:
+    ValuationResponse:
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/ValuationResponseHeader'
+        body:
+          $ref: '#/components/schemas/ValuationResponseBody'
+      additionalProperties: false
+    ValuationResponseBody:
+      type: object
+      properties:
+        claimNumber:
+          type:
+          - string
+          - 'null'
+        payload:
+          type:
+          - string
+          - 'null'
+        dataType:
+          type:
+          - string
+          - 'null'
+        extension:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ValuationResponseHeader:
+      type: object
+      properties:
+        cid:
+          type:
+          - string
+          - 'null'
+        statusCode:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+          scopes:
+            b2b.fnol.documents: Audatex Assignment API Access

@@ -1,0 +1,43 @@
+openapi: 3.2.0
+info:
+  title: Solera Estimate Return API
+  version: '2.0'
+  contact:
+    name: Solera
+    url: http://www.audatex.us/product.asp?pageid=zContact_us
+  license:
+    name: '@SoleraNorth America, Inc. All rights reserved'
+    url: http://www.audatex.us/
+  description: 'Operations tagged EstimateReturn across 2 of this provider''s published API definitions: solera-dashboard-assignment-openapi.json, solera-enterprise-assignment-prod-swagger.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /TestAssignmentapi
+tags:
+- name: EstimateReturn
+paths:
+  /api/v2/EstimateReturnResponse:
+    post:
+      tags:
+      - EstimateReturn
+      summary: Generate EstimateReturn Response
+      responses:
+        '200':
+          description: Success
+      security:
+      - oauth2:
+        - readAccess
+        - writeAccess
+    servers:
+    - url: /TestAssignmentapi
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Authorization using the JWT Bearer scheme
+      flows:
+        password:
+          tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+          scopes:
+            b2b.fnol.api: Audatex Assignment API Access
+x-refined-from:
+- solera-dashboard-assignment-openapi.json
+- solera-enterprise-assignment-prod-swagger.json

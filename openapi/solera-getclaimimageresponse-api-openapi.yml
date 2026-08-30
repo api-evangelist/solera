@@ -1,0 +1,48 @@
+openapi: 3.2.0
+info:
+  title: Audatex Assignment Get Document Get Claim Image Response API
+  description: Cancel an assignment to the Audatex system. Assignment messages are transmitted in the CIECA BMS format.
+  contact:
+    name: Audatex
+    email: http://www.audatex.us/product.asp?pageid=zContact_us
+  license:
+    name: '@Audatex North America, Inc. All rights reserved'
+    url: http://www.audatex.us/
+  version: '1.0'
+security:
+- Bearer: []
+tags:
+- name: GetClaimImageResponse
+paths:
+  /api/v{version}/claims/document/{locator}:
+    get:
+      tags:
+      - GetClaimImageResponse
+      parameters:
+      - name: locator
+        in: path
+        required: true
+        schema:
+          type:
+          - string
+          - 'null'
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: header
+        description: The requested API version
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: Authorization header using the Bearer scheme
+      name: Authorization
+      in: header

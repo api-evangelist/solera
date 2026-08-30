@@ -1,0 +1,249 @@
+openapi: 3.2.0
+info:
+  title: Solera Assignment API
+  version: '2.0'
+  contact:
+    name: Solera
+    url: http://www.audatex.us/product.asp?pageid=zContact_us
+  license:
+    name: '@SoleraNorth America, Inc. All rights reserved'
+    url: http://www.audatex.us/
+  description: 'Operations tagged Assignment across 2 of this provider''s published API definitions: solera-dashboard-assignment-openapi.json, solera-enterprise-assignment-prod-swagger.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /TestAssignmentapi
+tags:
+- name: Assignment
+paths:
+  /api/v2/assignments:
+    post:
+      tags:
+      - Assignment
+      summary: Creates a new assignment
+      operationId: AddAssignment
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/AddAssignmentRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddAssignmentRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AddAssignmentRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AddAssignmentRequest'
+      responses:
+        '201':
+          description: Add assignment request was received
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AddAssignmentRequest'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddAssignmentRequest'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AddAssignmentRequest'
+        '400':
+          description: The assignment data is invalid
+        '401':
+          description: The authentication token is either missing or invalid
+      security:
+      - oauth2:
+        - readAccess
+        - writeAccess
+    servers:
+    - url: /TestAssignmentapi
+  /api/v2/assignmentRequestMessage:
+    get:
+      tags:
+      - Assignment
+      summary: Get Sample Assignment Message
+      responses:
+        '200':
+          description: Success
+      security:
+      - oauth2:
+        - readAccess
+        - writeAccess
+    servers:
+    - url: /TestAssignmentapi
+  /api/v2/assignmentAcks:
+    post:
+      tags:
+      - Assignment
+      summary: Sample AssignmentAcks Response
+      responses:
+        '200':
+          description: Success
+      security:
+      - oauth2:
+        - readAccess
+        - writeAccess
+    servers:
+    - url: /TestAssignmentapi
+components:
+  schemas:
+    ResponseMessageRequest:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    AuthorizationRequest:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        body:
+          $ref: '#/components/schemas/AuthorizationBodyRequest'
+      additionalProperties: false
+    AuthorizationBodyRequest:
+      type: object
+      properties:
+        client_Id:
+          type:
+          - string
+          - 'null'
+        client_Secret:
+          type:
+          - string
+          - 'null'
+        audience:
+          type:
+          - string
+          - 'null'
+        scope:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    AddAssignmentRequestHeader:
+      type: object
+      properties:
+        messageType:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    AddAssignmentRequest:
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/AddAssignmentRequestHeader'
+        body:
+          $ref: '#/components/schemas/AddAssignmentRequestBody'
+        responseRoute:
+          $ref: '#/components/schemas/ResponseRouteRequest'
+      additionalProperties: false
+    ResponseRouteRequest:
+      type: object
+      properties:
+        authorization:
+          $ref: '#/components/schemas/AuthorizationRequest'
+        responseMessage:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ResponseMessageRequest'
+      additionalProperties: false
+    AddAssignmentRequestBody:
+      type: object
+      properties:
+        bmsVer:
+          type:
+          - string
+          - 'null'
+        claimNumber:
+          type:
+          - string
+          - 'null'
+          default: My Default String Value
+        content:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ResponseMessageRequest_2:
+      type: object
+      properties:
+        type:
+          type: string
+        href:
+          type: string
+    AuthorizationRequest_2:
+      type: object
+      properties:
+        href:
+          type: string
+        body:
+          $ref: '#/components/schemas/AuthorizationBodyRequest_2'
+    AuthorizationBodyRequest_2:
+      type: object
+      properties:
+        client_Id:
+          type: string
+        client_Secret:
+          type: string
+        audience:
+          type: string
+        scope:
+          type: string
+    AddAssignmentRequestHeader_2:
+      type: object
+      properties:
+        messageType:
+          type: string
+    AddAssignmentRequest_2:
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/AddAssignmentRequestHeader_2'
+        body:
+          $ref: '#/components/schemas/AddAssignmentRequestBody_2'
+        responseRoute:
+          $ref: '#/components/schemas/ResponseRouteRequest_2'
+    ResponseRouteRequest_2:
+      type: object
+      properties:
+        authorization:
+          $ref: '#/components/schemas/AuthorizationRequest_2'
+        responseMessage:
+          uniqueItems: false
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseMessageRequest_2'
+    AddAssignmentRequestBody_2:
+      type: object
+      properties:
+        bmsVer:
+          type: string
+        claimNumber:
+          default: My Default String Value
+          type: string
+        content:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Authorization using the JWT Bearer scheme
+      flows:
+        password:
+          tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+          scopes:
+            b2b.fnol.api: Audatex Assignment API Access
+x-refined-from:
+- solera-dashboard-assignment-openapi.json
+- solera-enterprise-assignment-prod-swagger.json

@@ -1,0 +1,69 @@
+openapi: 3.2.0
+info:
+  title: Solera Version API
+  version: '1.0'
+  description: 'Operations tagged Version across 3 of this provider''s published API definitions: solera-getdocuments-v1-openapi.json, solera-getimage-v2-openapi.json, solera-gic-integration-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /GetDocuments
+- url: /TestGICapi
+tags:
+- name: Version
+paths:
+  /api/Version:
+    get:
+      tags:
+      - Version
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+      security:
+      - oauth2:
+        - readAccess
+        - writeAccess
+    servers:
+    - url: /GetDocuments
+  /api/v{version}:
+    get:
+      tags:
+      - Version
+      parameters:
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: header
+        description: The requested API version
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+      security:
+      - Bearer: []
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        password:
+          tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+          scopes:
+            b2b.fnol.documents: Audatex Assignment API Access
+    Bearer:
+      type: apiKey
+      description: Authorization header using the Bearer scheme
+      name: Authorization
+      in: header
+x-refined-from:
+- solera-getdocuments-v1-openapi.json
+- solera-getimage-v2-openapi.json
+- solera-gic-integration-openapi.json

@@ -1,0 +1,222 @@
+openapi: 3.2.0
+info:
+  title: Solera Get Image API
+  version: '2.0'
+  contact:
+    name: Solera
+    url: http://www.audatex.us/product.asp?pageid=zContact_us
+  license:
+    name: '@SoleraNorth America, Inc. All rights reserved'
+    url: http://www.audatex.us/
+  description: 'Operations tagged GetImage across 2 of this provider''s published API definitions: solera-claim-images-openapi.json, solera-claim-images-prod-swagger.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /TestClaimImageapi
+security:
+- oauth2: []
+tags:
+- name: GetImage
+paths:
+  /api/v2/image/{ClaimImage}:
+    get:
+      tags:
+      - GetImage
+      summary: ( Example ClaimImage - C293B120-A763-404E-AC9D-2A687128D3DC)
+      parameters:
+      - name: ClaimImage
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Gets image
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '400':
+          description: The ClaimImage is invalid
+        '401':
+          description: The authentication token is either missing or invalid
+    servers:
+    - url: /TestClaimImageapi
+  /api/v2/decodedFile:
+    get:
+      tags:
+      - GetImage
+      summary: Gets a decoded file
+      responses:
+        '200':
+          description: Gets image
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: string
+                format: binary
+            text/json:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: The type is invalid
+        '401':
+          description: The authentication token is either missing or invalid
+    servers:
+    - url: /TestClaimImageapi
+  /api/v{version}/image/{ClaimImage}:
+    get:
+      tags:
+      - GetImage
+      summary: ( Example ClaimImage - C293B120-A763-404E-AC9D-2A687128D3DC)
+      operationId: valuationReturn
+      parameters:
+      - name: ClaimImage
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '2.0'
+      responses:
+        '201':
+          description: Gets image
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '400':
+          description: The ClaimImage is invalid
+        '401':
+          description: The authentication token is either missing or invalid
+      deprecated: false
+    servers:
+    - url: /TestClaimImageapi
+  /api/v{version}/image/{type}:
+    get:
+      tags:
+      - GetImage
+      summary: Gets a decoded file
+      operationId: decodeImage
+      parameters:
+      - name: version
+        in: path
+        required: true
+        schema:
+          type: string
+          default: '2'
+      - name: type
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+          default: '2.0'
+      responses:
+        '200':
+          description: Gets image
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/FileResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/FileResult'
+        '400':
+          description: The type is invalid
+        '401':
+          description: The authentication token is either missing or invalid
+      deprecated: false
+    servers:
+    - url: /TestClaimImageapi
+components:
+  schemas:
+    FileResult:
+      type: object
+      properties:
+        contentType:
+          type: string
+          readOnly: true
+        fileDownloadName:
+          type: string
+        lastModified:
+          format: date-time
+          type: string
+        entityTag:
+          $ref: '#/components/schemas/EntityTagHeaderValue'
+        enableRangeProcessing:
+          type: boolean
+    EntityTagHeaderValue:
+      type: object
+      properties:
+        tag:
+          $ref: '#/components/schemas/StringSegment'
+          readOnly: true
+        isWeak:
+          type: boolean
+          readOnly: true
+    StringSegment:
+      type: object
+      properties:
+        buffer:
+          type: string
+          readOnly: true
+        offset:
+          format: int32
+          type: integer
+          readOnly: true
+        length:
+          format: int32
+          type: integer
+          readOnly: true
+        value:
+          type: string
+          readOnly: true
+        hasValue:
+          type: boolean
+          readOnly: true
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Authorization using the JWT Bearer scheme
+      flows:
+        password:
+          tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+          scopes:
+            b2b.fnol.api: Audatex Assignment API Access
+x-refined-from:
+- solera-claim-images-openapi.json
+- solera-claim-images-prod-swagger.json
