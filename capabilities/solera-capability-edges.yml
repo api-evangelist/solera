@@ -1,0 +1,26 @@
+slug: solera
+provider: Solera
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Insurance
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: GetDocuments
+  spec_file: solera-getdocuments-api-openapi.yml
+  capability_id: BC-2160
+  capability_id_l1: BC-2160
+  capability_name: Insurance Claims Management
+  confidence: 0.72
+  evidence: GET /api/v{version}/claims/{assignmentId}/document/{locator}; "Retrieve documents from the
+    Audatex system"
+  reason: Document retrieval keyed by claim assignment id within an auto physical damage claims platform,
+    so it supports insurance claims handling; too generic to pin a sub-capability (document could serve
+    intake, adjustment or settlement).
