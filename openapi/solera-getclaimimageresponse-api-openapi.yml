@@ -39,6 +39,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Get api v{version} claims document by locator
+      x-summary-source: derived
+      operationId: getApiV{version}ClaimsDocumentByLocator
+      x-operation-id-source: derived
 components:
   securitySchemes:
     Bearer:

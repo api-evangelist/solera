@@ -27,6 +27,10 @@ paths:
       - oauth2:
         - readAccess
         - writeAccess
+      summary: Get api version
+      x-summary-source: derived
+      operationId: getApiVersion
+      x-operation-id-source: derived
     servers:
     - url: /GetDocuments
   /api/v{version}:
@@ -49,6 +53,10 @@ paths:
           description: Success
       security:
       - Bearer: []
+      summary: Get api v{version}
+      x-summary-source: derived
+      operationId: getApiV{version}
+      x-operation-id-source: derived
 components:
   securitySchemes:
     oauth2:

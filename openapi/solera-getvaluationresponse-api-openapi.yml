@@ -52,8 +52,32 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ValuationDocumentResponse'
+      summary: Get api v{version} valuation by type by process id
+      x-summary-source: derived
+      operationId: getApiV{version}ValuationByTypeByProcessId
+      x-operation-id-source: derived
 components:
   schemas:
+    ValuationDocumentResponseHeader:
+      type: object
+      properties:
+        cid:
+          type:
+          - string
+          - 'null'
+        statusCode:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ValuationDocumentResponse:
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/ValuationDocumentResponseHeader'
+        body:
+          $ref: '#/components/schemas/ValuationtResponseBody'
+      additionalProperties: false
     ValuationtResponseBody:
       type: object
       properties:
@@ -82,26 +106,6 @@ components:
           - string
           - 'null'
         dataType:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ValuationDocumentResponse:
-      type: object
-      properties:
-        header:
-          $ref: '#/components/schemas/ValuationDocumentResponseHeader'
-        body:
-          $ref: '#/components/schemas/ValuationtResponseBody'
-      additionalProperties: false
-    ValuationDocumentResponseHeader:
-      type: object
-      properties:
-        cid:
-          type:
-          - string
-          - 'null'
-        statusCode:
           type:
           - string
           - 'null'

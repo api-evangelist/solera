@@ -21,7 +21,7 @@ paths:
     get:
       tags:
       - GetDocument
-      summary: ( Example assignmentId - 332067651 , locator - 8a4a7758-f035-49b7-aa76-69280128123b  )
+      summary: ( Example assignmentId - 332067651 , locator…
       parameters:
       - name: assignmentId
         in: path
@@ -50,6 +50,8 @@ paths:
           description: Invalid query parameter(s). Read the response description
         '401':
           description: Authorization has been denied for this request
+      operationId: getApiV2GetDocumentByAssignmentIdByLocator
+      x-operation-id-source: derived
   /api/v2/{type}:
     get:
       tags:
@@ -81,6 +83,8 @@ paths:
           description: Invalid query parameter(s). Read the response description
         '401':
           description: Authorization has been denied for this request
+      operationId: getApiV2ByType
+      x-operation-id-source: derived
 components:
   securitySchemes:
     oauth2:

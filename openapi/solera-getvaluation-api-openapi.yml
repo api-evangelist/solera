@@ -46,8 +46,24 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ValuationResponse'
+      summary: Get api v{version} get valuation
+      x-summary-source: derived
+      operationId: getApiV{version}GetValuation
+      x-operation-id-source: derived
 components:
   schemas:
+    ValuationResponseHeader:
+      type: object
+      properties:
+        cid:
+          type:
+          - string
+          - 'null'
+        statusCode:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     ValuationResponse:
       type: object
       properties:
@@ -72,18 +88,6 @@ components:
           - string
           - 'null'
         extension:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ValuationResponseHeader:
-      type: object
-      properties:
-        cid:
-          type:
-          - string
-          - 'null'
-        statusCode:
           type:
           - string
           - 'null'

@@ -1,0 +1,26 @@
+# Front Door AI Index — solera — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: solera
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.solera.com
+  final_host: www.solera.com
+  ownership: own
+  owner: solera
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 3
+  host_score: 3
+  density: 5.08
+  words: 590
+  tiers:
+    agentic: 0
+    core: 3
+    model: 0
+  ambiguous: 2
+  top_terms:
+    AI: 3
+    intelligence: 2

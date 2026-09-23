@@ -50,6 +50,8 @@ paths:
           description: Invalid query parameter(s). Read the response description
         '401':
           description: Authorization has been denied for this request
+      operationId: getApiV2ValuationByTypeByProcessId
+      x-operation-id-source: derived
   /api/v2/valuation/{type}:
     get:
       tags:
@@ -81,6 +83,8 @@ paths:
           description: Invalid query parameter(s). Read the response description
         '401':
           description: Authorization has been denied for this request
+      operationId: getApiV2ValuationByType
+      x-operation-id-source: derived
 components:
   securitySchemes:
     oauth2:

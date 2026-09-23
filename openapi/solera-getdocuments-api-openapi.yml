@@ -46,6 +46,10 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/DocumentResponse'
+      summary: Get api v{version} get document
+      x-summary-source: derived
+      operationId: getApiV{version}GetDocument
+      x-operation-id-source: derived
   /api/v{version}/claims/{assignmentId}/document/{locator}:
     get:
       tags:
@@ -70,8 +74,24 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Get api v{version} claims by assignment id document by locator
+      x-summary-source: derived
+      operationId: getApiV{version}ClaimsByAssignmentIdDocumentByLocator
+      x-operation-id-source: derived
 components:
   schemas:
+    DocumentResponseHeader:
+      type: object
+      properties:
+        cid:
+          type:
+          - string
+          - 'null'
+        statusCode:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     DocumentResponseBody:
       type: object
       properties:
@@ -104,18 +124,6 @@ components:
           - string
           - 'null'
         dataType:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DocumentResponseHeader:
-      type: object
-      properties:
-        cid:
-          type:
-          - string
-          - 'null'
-        statusCode:
           type:
           - string
           - 'null'
