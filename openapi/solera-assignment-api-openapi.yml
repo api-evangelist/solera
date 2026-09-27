@@ -77,26 +77,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AuthorizationBodyRequest:
-      type: object
-      properties:
-        client_Id:
-          type:
-          - string
-          - 'null'
-        client_Secret:
-          type:
-          - string
-          - 'null'
-        audience:
-          type:
-          - string
-          - 'null'
-        scope:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     AddAssignmentRequestBody:
       type: object
       properties:
@@ -122,15 +102,35 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    AuthorizationRequest:
+    AddAssignmentRequest:
       type: object
       properties:
-        href:
+        header:
+          $ref: '#/components/schemas/AddAssignmentRequestHeader'
+        body:
+          $ref: '#/components/schemas/AddAssignmentRequestBody'
+        responseRoute:
+          $ref: '#/components/schemas/ResponseRouteRequest'
+      additionalProperties: false
+    AuthorizationBodyRequest:
+      type: object
+      properties:
+        client_Id:
           type:
           - string
           - 'null'
-        body:
-          $ref: '#/components/schemas/AuthorizationBodyRequest'
+        client_Secret:
+          type:
+          - string
+          - 'null'
+        audience:
+          type:
+          - string
+          - 'null'
+        scope:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ResponseMessageRequest:
       type: object
@@ -156,15 +156,15 @@ components:
           items:
             $ref: '#/components/schemas/ResponseMessageRequest'
       additionalProperties: false
-    AddAssignmentRequest:
+    AuthorizationRequest:
       type: object
       properties:
-        header:
-          $ref: '#/components/schemas/AddAssignmentRequestHeader'
+        href:
+          type:
+          - string
+          - 'null'
         body:
-          $ref: '#/components/schemas/AddAssignmentRequestBody'
-        responseRoute:
-          $ref: '#/components/schemas/ResponseRouteRequest'
+          $ref: '#/components/schemas/AuthorizationBodyRequest'
       additionalProperties: false
   securitySchemes:
     oauth2:

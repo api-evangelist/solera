@@ -168,6 +168,21 @@ paths:
     - url: /TestClaimImageapi
 components:
   schemas:
+    FileResult:
+      type: object
+      properties:
+        contentType:
+          type: string
+          readOnly: true
+        fileDownloadName:
+          type: string
+        lastModified:
+          format: date-time
+          type: string
+        entityTag:
+          $ref: '#/components/schemas/EntityTagHeaderValue'
+        enableRangeProcessing:
+          type: boolean
     EntityTagHeaderValue:
       type: object
       properties:
@@ -197,21 +212,6 @@ components:
         hasValue:
           type: boolean
           readOnly: true
-    FileResult:
-      type: object
-      properties:
-        contentType:
-          type: string
-          readOnly: true
-        fileDownloadName:
-          type: string
-        lastModified:
-          format: date-time
-          type: string
-        entityTag:
-          $ref: '#/components/schemas/EntityTagHeaderValue'
-        enableRangeProcessing:
-          type: boolean
   securitySchemes:
     oauth2:
       type: oauth2
