@@ -77,22 +77,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AddAssignmentRequestBody:
+    AuthorizationRequest:
       type: object
       properties:
-        bmsVer:
+        href:
           type:
           - string
           - 'null'
-        claimNumber:
-          type:
-          - string
-          - 'null'
-          default: My Default String Value
-        content:
-          type:
-          - string
-          - 'null'
+        body:
+          $ref: '#/components/schemas/AuthorizationBodyRequest'
       additionalProperties: false
     AddAssignmentRequestHeader:
       type: object
@@ -102,15 +95,17 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    AddAssignmentRequest:
+    ResponseRouteRequest:
       type: object
       properties:
-        header:
-          $ref: '#/components/schemas/AddAssignmentRequestHeader'
-        body:
-          $ref: '#/components/schemas/AddAssignmentRequestBody'
-        responseRoute:
-          $ref: '#/components/schemas/ResponseRouteRequest'
+        authorization:
+          $ref: '#/components/schemas/AuthorizationRequest'
+        responseMessage:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ResponseMessageRequest'
       additionalProperties: false
     AuthorizationBodyRequest:
       type: object
@@ -144,27 +139,32 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ResponseRouteRequest:
+    AddAssignmentRequestBody:
       type: object
       properties:
-        authorization:
-          $ref: '#/components/schemas/AuthorizationRequest'
-        responseMessage:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ResponseMessageRequest'
-      additionalProperties: false
-    AuthorizationRequest:
-      type: object
-      properties:
-        href:
+        bmsVer:
           type:
           - string
           - 'null'
+        claimNumber:
+          type:
+          - string
+          - 'null'
+          default: My Default String Value
+        content:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    AddAssignmentRequest:
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/AddAssignmentRequestHeader'
         body:
-          $ref: '#/components/schemas/AuthorizationBodyRequest'
+          $ref: '#/components/schemas/AddAssignmentRequestBody'
+        responseRoute:
+          $ref: '#/components/schemas/ResponseRouteRequest'
       additionalProperties: false
   securitySchemes:
     oauth2:

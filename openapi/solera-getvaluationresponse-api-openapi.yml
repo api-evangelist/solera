@@ -58,6 +58,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ValuationDocumentResponse:
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/ValuationDocumentResponseHeader'
+        body:
+          $ref: '#/components/schemas/ValuationtResponseBody'
+      additionalProperties: false
     ValuationDocumentResponseHeader:
       type: object
       properties:
@@ -69,14 +77,6 @@ components:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    ValuationDocumentResponse:
-      type: object
-      properties:
-        header:
-          $ref: '#/components/schemas/ValuationDocumentResponseHeader'
-        body:
-          $ref: '#/components/schemas/ValuationtResponseBody'
       additionalProperties: false
     ValuationtResponseBody:
       type: object

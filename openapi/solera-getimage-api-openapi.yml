@@ -168,6 +168,15 @@ paths:
     - url: /TestClaimImageapi
 components:
   schemas:
+    EntityTagHeaderValue:
+      type: object
+      properties:
+        tag:
+          $ref: '#/components/schemas/StringSegment'
+          readOnly: true
+        isWeak:
+          type: boolean
+          readOnly: true
     FileResult:
       type: object
       properties:
@@ -183,15 +192,6 @@ components:
           $ref: '#/components/schemas/EntityTagHeaderValue'
         enableRangeProcessing:
           type: boolean
-    EntityTagHeaderValue:
-      type: object
-      properties:
-        tag:
-          $ref: '#/components/schemas/StringSegment'
-          readOnly: true
-        isWeak:
-          type: boolean
-          readOnly: true
     StringSegment:
       type: object
       properties:

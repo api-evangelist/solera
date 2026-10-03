@@ -80,14 +80,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DocumentResponse:
-      type: object
-      properties:
-        header:
-          $ref: '#/components/schemas/DocumentResponseHeader'
-        body:
-          $ref: '#/components/schemas/DocumentResponseBody'
-      additionalProperties: false
     DocumentResponseHeader:
       type: object
       properties:
@@ -135,6 +127,14 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    DocumentResponse:
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/DocumentResponseHeader'
+        body:
+          $ref: '#/components/schemas/DocumentResponseBody'
       additionalProperties: false
   securitySchemes:
     oauth2:
