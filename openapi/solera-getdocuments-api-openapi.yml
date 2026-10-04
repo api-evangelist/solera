@@ -80,18 +80,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DocumentResponseHeader:
-      type: object
-      properties:
-        cid:
-          type:
-          - string
-          - 'null'
-        statusCode:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     DocumentResponseBody:
       type: object
       properties:
@@ -124,6 +112,18 @@ components:
           - string
           - 'null'
         dataType:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DocumentResponseHeader:
+      type: object
+      properties:
+        cid:
+          type:
+          - string
+          - 'null'
+        statusCode:
           type:
           - string
           - 'null'

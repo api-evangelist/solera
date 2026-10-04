@@ -77,24 +77,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AuthorizationRequest:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        body:
-          $ref: '#/components/schemas/AuthorizationBodyRequest'
-      additionalProperties: false
-    AddAssignmentRequestHeader:
-      type: object
-      properties:
-        messageType:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     ResponseRouteRequest:
       type: object
       properties:
@@ -139,6 +121,16 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    AuthorizationRequest:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        body:
+          $ref: '#/components/schemas/AuthorizationBodyRequest'
+      additionalProperties: false
     AddAssignmentRequestBody:
       type: object
       properties:
@@ -165,6 +157,14 @@ components:
           $ref: '#/components/schemas/AddAssignmentRequestBody'
         responseRoute:
           $ref: '#/components/schemas/ResponseRouteRequest'
+      additionalProperties: false
+    AddAssignmentRequestHeader:
+      type: object
+      properties:
+        messageType:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
   securitySchemes:
     oauth2:
