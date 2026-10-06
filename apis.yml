@@ -67,7 +67,7 @@ tags:
 - CIECA
 - Insurtech
 created: '2026-07-25'
-modified: '2026-07-25'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: solera:solera-assignment-api
@@ -533,6 +533,8 @@ apis:
   - type: Sandbox
     url: sandbox/solera-sandbox.yml
 common:
+- url: https://www.solera.com/blog/feed/
+  type: BlogRSS
 - type: CapabilityMap
   url: capabilities/solera-capability-edges.yml
   name: Solera Business Capability Map
