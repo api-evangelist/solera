@@ -77,17 +77,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ResponseRouteRequest:
+    AddAssignmentRequestHeader:
       type: object
       properties:
-        authorization:
-          $ref: '#/components/schemas/AuthorizationRequest'
-        responseMessage:
+        messageType:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            $ref: '#/components/schemas/ResponseMessageRequest'
       additionalProperties: false
     AuthorizationBodyRequest:
       type: object
@@ -109,27 +105,17 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ResponseMessageRequest:
+    ResponseRouteRequest:
       type: object
       properties:
-        type:
+        authorization:
+          $ref: '#/components/schemas/AuthorizationRequest'
+        responseMessage:
           type:
-          - string
+          - array
           - 'null'
-        href:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    AuthorizationRequest:
-      type: object
-      properties:
-        href:
-          type:
-          - string
-          - 'null'
-        body:
-          $ref: '#/components/schemas/AuthorizationBodyRequest'
+          items:
+            $ref: '#/components/schemas/ResponseMessageRequest'
       additionalProperties: false
     AddAssignmentRequestBody:
       type: object
@@ -148,6 +134,28 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    AuthorizationRequest:
+      type: object
+      properties:
+        href:
+          type:
+          - string
+          - 'null'
+        body:
+          $ref: '#/components/schemas/AuthorizationBodyRequest'
+      additionalProperties: false
+    ResponseMessageRequest:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        href:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     AddAssignmentRequest:
       type: object
       properties:
@@ -157,14 +165,6 @@ components:
           $ref: '#/components/schemas/AddAssignmentRequestBody'
         responseRoute:
           $ref: '#/components/schemas/ResponseRouteRequest'
-      additionalProperties: false
-    AddAssignmentRequestHeader:
-      type: object
-      properties:
-        messageType:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
   securitySchemes:
     oauth2:
