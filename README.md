@@ -1,4 +1,4 @@
-# Solera (solera)
+# Solera
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,110 +64,167 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Solera is a Westlake, Texas headquartered vehicle lifecycle management software, data, and services company operating in more than 100 countries, and one of the claims-technology intermediaries that sits between property and casualty insurers and the repair, salvage, and fleet economy rather than underwriting risk itself. Its insurance-facing business is automobile physical damage claims — first notice of loss intake, photo and AI damage assessment, repair cost estimating, total loss valuation, parts sourcing, and claims workflow — delivered through the Audatex and Qapter brands alongside Vehicle Repair, Dealer Solutions, and Fleet Solutions divisions.
+Solera is a Westlake, Texas headquartered vehicle lifecycle management software, data, and services company operating in more than 100 countries, and one of the claims-technology intermediaries that sits between property and casualty insurers and the repair, salvage, and fleet economy rather than underwriting risk itself. Its insurance-facing business is automobile physical damage claims — first notice of loss intake, photo and AI damage assessment, repair cost estimating, total loss valuation, parts sourcing, and claims workflow — delivered through the Audatex and Qapter brands alongside Vehicle Repair (Identifix, Autodata, Hollander), Dealer Solutions (DealerSocket, cap hpi), and Fleet Solutions (Omnitracs, SmartDrive, eDriving) divisions. Its API posture is characteristic of the United States insurance market seam — there is no self-serve developer portal on solera.com, no signup, and no public API key. The Solera Integrations portal at na.api.solera.com returns HTTP 200 to an Audatex user ID and password login wall, and onboarding is a provisioned B2B integration run through a Solera account representative with a kickoff meeting and UAT. What is genuinely public is a set of anonymously readable Swagger UI reference pages and machine readable OpenAPI 3.0.1 documents on the Audatex demo API host, plus PDF integration guides on na.api.solera.com/files, covering assignment dispatch and first notice of loss, claim image retrieval, and GIC integration. Authentication is OAuth 2.0 against an IdentityServer discovery document at dispatch-login-demo.audatex.com with resource scopes including b2b.fnol.api, gofnol.api, estimatics.api, and hqclaims.api. Solera does not reference ACORD anywhere in its public integration documentation. Its published standards alignment is CIECA instead — Audatex is documented as a Corporate Technology member of the Collision Industry Electronic Commerce Association and licensed to use CIECA standards, with the BMS 5.7 schema as the data mapping baseline for estimate return, which is the auto physical damage sector's analogue to ACORD rather than ACORD itself.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/solera/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/solera/refs/heads/main/apis.yml)
+**Areas:** Insurance · United States · Property and Casualty · Claims · Claims Technology · Automotive Claims · FNOL · Vehicle Damage Assessment · Risk Data · CIECA · Insurtech
 
-## API Posture
+## Solera on APIs.io
 
-Solera has **no self-serve developer portal**. Every first-party developer subdomain probed on 2026-07-25 — `developer.solera.com`, `developers.solera.com`, `docs.solera.com`, `api.solera.com`, `apis.solera.com` — fails to resolve, and `/developers`, `/developer`, `/api`, `/partners` and `/integrations` on `www.solera.com` all return HTTP 404.
+Everything profiled for Solera is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/solera/](https://apis.io/providers/solera/)** — or go straight to one of the APIs or properties below.
 
-The Solera Integrations portal at [https://na.api.solera.com/](https://na.api.solera.com/) returns HTTP 200 but redirects straight to `/Login` and renders an Audatex-branded User ID and Password sign-in form. There is no registration, no plan page, and no public API key. That is a **partner login wall**, not a developer portal, and onboarding is a provisioned B2B integration run through a Solera account representative with a kickoff meeting, a segregated client test environment, and UAT.
+### APIs (11)
 
-What is genuinely public is narrower but real: three anonymously readable Swagger UI reference pages and three machine-readable **OpenAPI 3.0.1** documents on the Audatex demo API host, plus PDF and DOCX integration guides served without login from `na.api.solera.com/files/`. All three specs were harvested verbatim into [`openapi/`](openapi/).
+- [Solera Assignment API](https://apis.io/apis/solera/solera-assignment-api/) — The Assignment API from Solera — 3 operation(s) for assignment.
+- [Solera Estimate Return API](https://apis.io/apis/solera/solera-estimatereturn-api/) — The EstimateReturn API from Solera — 1 operation(s) for estimatereturn.
+- [Solera Get Claim Image Response API](https://apis.io/apis/solera/solera-getclaimimageresponse-api/) — The GetClaimImageResponse API from Solera — 1 operation(s) for getclaimimageresponse.
+- [Solera Get Document API](https://apis.io/apis/solera/solera-getdocument-api/) — The GetDocument API from Solera — 2 operation(s) for getdocument.
+- [Solera Get Documents API](https://apis.io/apis/solera/solera-getdocuments-api/) — The GetDocuments API from Solera — 2 operation(s) for getdocuments.
+- [Solera Get Image API](https://apis.io/apis/solera/solera-getimage-api/) — The GetImage API from Solera — 4 operation(s) for getimage.
+- [Solera Get Valuation API](https://apis.io/apis/solera/solera-getvaluation-api/) — The GetValuation API from Solera — 1 operation(s) for getvaluation.
+- [Solera Get Valuation Response API](https://apis.io/apis/solera/solera-getvaluationresponse-api/) — The GetValuationResponse API from Solera — 1 operation(s) for getvaluationresponse.
+- [Solera GIC Integration API](https://apis.io/apis/solera/solera-gicintegration-api/) — The GICIntegration API from Solera — 2 operation(s) for gicintegration.
+- [Solera Valuation Return API](https://apis.io/apis/solera/solera-valuationreturn-api/) — The ValuationReturn API from Solera — 2 operation(s) for valuationreturn.
+- [Solera Version API](https://apis.io/apis/solera/solera-version-api/) — The Version API from Solera — 2 operation(s) for version.
 
-### Standards posture
+### Published properties
 
-**No ACORD reference found.** Nothing on solera.com, na.api.solera.com, in the harvested specs, or in the integration guides mentions ACORD, AL3, ACORD XML, NGDS, IVANS, agency download, Applied Epic, or Vertafore AMS360. Solera's published standards alignment is **CIECA** — the auto physical damage sector's analogue to ACORD. The Estimate Document Return API Integration Guide states that Audatex is a Corporate Technology member of the Collision Industry Electronic Commerce Association and is licensed to use CIECA standards in its products, with **BMS 5.7** as the schema baseline for estimate return data mapping.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Insurance verbs
+#### AsyncAPI (2)
 
-| Verb | Exposed | Notes |
-| --- | --- | --- |
-| Quote | No | Solera is not a carrier; there is no rating or quoting surface. |
-| Bind | No | Not applicable. |
-| Issue | No | Not applicable. |
-| **FNOL** | **Yes (partner-only)** | Assignment creation and estimate return; OAuth scopes `b2b.fnol.api`, `gofnol.api`, `b2b.fnol.documents`, `b2b.fnol.transformer`. |
+Event-driven and webhook contracts.
 
-### Authentication
+- [Solera / Audatex EAPI Event Callbacks](https://apis.io/asyncapis/solera/solera-eapi-asyncapi/)
+- [Solera Webhooks](https://apis.io/asyncapis/solera/solera-webhooks/)
 
-OAuth 2.0 via IdentityServer, with Basic Authorization also documented. The OpenID Connect discovery document at [dispatch-login-demo.audatex.com/.well-known/openid-configuration](https://dispatch-login-demo.audatex.com/.well-known/openid-configuration) is anonymously readable and advertises `authorization_code`, `client_credentials`, `password`, `refresh_token`, `implicit`, and device-code grants across 32 scopes including `estimatics.api`, `hqclaims.api`, `novo.claims.manager`, `mobile.inspection.api`, `marketdata.web.api`, and `vinhistory.api`.
+#### Event channels (4)
 
-## Tags
+Individual events and webhooks the provider emits.
 
-- Insurance
-- United States
-- Property and Casualty
-- Claims
-- Claims Technology
-- Automotive Claims
-- FNOL
-- Vehicle Damage Assessment
-- Risk Data
-- CIECA
-- Insurtech
+- [{clientAssignmentAckEndpoint}](https://apis.io/channels/solera/clientassignmentackendpoint/)
+- [{clientClaimImageEndpoint}](https://apis.io/channels/solera/clientclaimimageendpoint/)
+- [{clientEstimateReturnEndpoint}](https://apis.io/channels/solera/clientestimatereturnendpoint/)
+- [{clientM31Endpoint}](https://apis.io/channels/solera/clientm31endpoint/)
 
-## Timestamps
+#### MCP servers (1)
 
-- **Created:** 2026-07-25
-- **Modified:** 2026-07-25
+Model Context Protocol servers that expose the API to agents.
 
-## APIs
+- [solera](https://apis.io/servers/solera/solera/)
 
-### Solera Dashboard Assignment API
+#### Agentic access (1)
 
-Assignment dispatch and first notice of loss intake for automobile physical damage claims. Creates a new assignment, retrieves a sample assignment request message, posts assignment acknowledgements, and generates an estimate return response.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://api-demo.audatex.com/TestAssignmentapi/docs/index.html](https://api-demo.audatex.com/TestAssignmentapi/docs/index.html)
-- **Base URL:** `https://api-demo.audatex.com/TestAssignmentapi`
+- [Solera Agentic Access](https://apis.io/agentic-access/solera/solera-agentic-access/)
 
-#### Properties
+#### Collections (10)
 
-- [OpenAPI](openapi/solera-dashboard-assignment-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://na.api.solera.com/files/Estimate%20Return%20API.pdf)
-- [API Reference](https://api-demo.audatex.com/TestAssignmentapi/docs/index.html)
-- [Authentication](https://dispatch-login-demo.audatex.com/.well-known/openid-configuration)
+Postman and Open Collection request collections.
 
-### Solera ClaimImages API
+- [ClaimImages API](https://apis.io/collections/solera/open-solera-claim-images/)
+- [ClaimImages API](https://apis.io/collections/solera/open-solera-claim-images-prod-swagger/)
+- [Solera Dashboard Assignment API](https://apis.io/collections/solera/open-solera-dashboard-assignment/)
+- [EAPI Get Document API](https://apis.io/collections/solera/open-solera-eapi-getdocument/)
+- [Solera Enterprise API](https://apis.io/collections/solera/open-solera-enterprise-assignment-prod-swagger/)
+- [Audatex GetDocuments API](https://apis.io/collections/solera/open-solera-getdocuments-v1/)
+- [Audatex GetDocuments API](https://apis.io/collections/solera/open-solera-getdocuments-v2/)
+- [Audatex Assignment Get Document API](https://apis.io/collections/solera/open-solera-getimage-v1/)
+- [Audatex Assignment Get Document API](https://apis.io/collections/solera/open-solera-getimage-v2/)
+- [EAPI GIC Integration API](https://apis.io/collections/solera/open-solera-gic-integration/)
 
-Retrieval of claim images and decoded document files attached to an automobile damage claim, used by insurer claim management systems consuming Audatex claim documentation.
+#### Overlays (10)
 
-- **Human URL:** [https://api-demo.audatex.com/TestClaimImageapi/docs/index.html](https://api-demo.audatex.com/TestClaimImageapi/docs/index.html)
-- **Base URL:** `https://api-demo.audatex.com/TestClaimImageapi`
+OpenAPI overlays, including conversational phrasing for each operation.
 
-#### Properties
+- [Solera Claim Images Overlay](https://apis.io/overlays/solera/solera-claim-images-overlay/)
+- [Solera Claim Images Prod Swagger Overlay](https://apis.io/overlays/solera/solera-claim-images-prod-swagger-overlay/)
+- [Solera Dashboard Assignment Overlay](https://apis.io/overlays/solera/solera-dashboard-assignment-overlay/)
+- [Solera Eapi Getdocument Overlay](https://apis.io/overlays/solera/solera-eapi-getdocument-overlay/)
+- [Solera Enterprise Assignment Prod Swagger Overlay](https://apis.io/overlays/solera/solera-enterprise-assignment-prod-swagger-overlay/)
+- [Solera Getdocuments V1 Overlay](https://apis.io/overlays/solera/solera-getdocuments-v1-overlay/)
+- [Solera Getdocuments V2 Overlay](https://apis.io/overlays/solera/solera-getdocuments-v2-overlay/)
+- [Solera Getimage V1 Overlay](https://apis.io/overlays/solera/solera-getimage-v1-overlay/)
+- [Solera Getimage V2 Overlay](https://apis.io/overlays/solera/solera-getimage-v2-overlay/)
+- [Solera Gic Integration Overlay](https://apis.io/overlays/solera/solera-gic-integration-overlay/)
 
-- [OpenAPI](openapi/solera-claim-images-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf)
-- [API Reference](https://api-demo.audatex.com/TestClaimImageapi/docs/index.html)
-- [Authentication](https://dispatch-login-demo.audatex.com/.well-known/openid-configuration)
+#### Security (2)
 
-### Solera EAPI GIC Integration API
+Authentication, trust centre, and vulnerability disclosure.
 
-Global Integration Component endpoint used to post GIC integration payloads against a work assignment identifier, acknowledge M31 events, and report the deployed API version.
+- [Solera Authentication](https://apis.io/security/solera/solera-authentication/)
+- [Solera Domain Security](https://apis.io/security/solera/solera-domain-security/)
 
-- **Human URL:** [https://api-demo.audatex.com/TestGICapi/docs/index.html](https://api-demo.audatex.com/TestGICapi/docs/index.html)
-- **Base URL:** `https://api-demo.audatex.com/TestGICapi`
+#### OAuth scopes (1)
 
-#### Properties
+The permissions the API asks for.
 
-- [OpenAPI](openapi/solera-gic-integration-openapi.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Documentation](https://na.api.solera.com/files/GIC%20-%20Image%20Capture%20API.docx)
-- [API Reference](https://api-demo.audatex.com/TestGICapi/docs/index.html)
-- [Authentication](https://dispatch-login-demo.audatex.com/.well-known/openid-configuration)
+- [Solera Scopes](https://apis.io/scopes/solera/solera-scopes/)
 
-## Links
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.solera.com/)
-- [Company](https://www.solera.com/company/)
+- [Documentation](https://na.api.solera.com/files/Estimate%20Return%20API.pdf)
+- [Getting started](https://na.api.solera.com/files/Estimate%20Return%20API.pdf)
+- [API reference](https://api-prod.audatex.com/TestAssignmentapi/docs/index.html)
+- [Support](https://www.solera.com/contact-us/)
 - [Blog](https://www.solera.com/blog/)
-- [Solera Integrations Portal (login wall)](https://na.api.solera.com/)
-- [CIECA](https://www.cieca.com/)
+- [Terms of service](https://www.solera.com/us-canada-master-services-agreement/)
+- [Privacy policy](https://www.solera.com/privacy-policy/)
 
-## Review
+## API Evangelist rating
 
-See [review.yml](review.yml) for the full API Evangelist review, including every probed URL with its HTTP status, spec provenance, the verbatim CIECA statement, and the OAuth scope inventory.
+**Kin Score 41.6** — developing · rubric 0.25.0 · scored 2026-10-23
 
-## Related
+| Facet | Score |
+|---|---|
+| Discoverability | 72.3 |
+| Contract quality | 45.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 56.5 |
+| Access clarity | 21.1 |
 
-Audatex is a Solera company and has a separate profile at [api-evangelist/audatex](https://github.com/api-evangelist/audatex), which overlaps this surface.
+**Agent readiness 30.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 36.8** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/solera/](https://apis.io/providers/solera/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Solera: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/solera/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
